@@ -84,6 +84,15 @@ namespace BasePageObjectModel
 			}
 		}
 
+		public static void FillOutFormByPartialNames(this BasePage page, Dictionary<string, string> namesAndValues)
+		{
+			foreach (KeyValuePair<string, string> namesAndValue in namesAndValues)
+			{
+				var element = page.WebDriver.FindElement(page.ByPartialName(namesAndValue.Key));
+				FillElement(element, namesAndValue.Value);
+			}
+		}
+
 		public static void FillElement(IWebElement webElement, string value)
 		{
 			var type = webElement.GetAttribute("type").ToLower();
@@ -139,6 +148,11 @@ namespace BasePageObjectModel
 			var label = page.FindLabel(labelText);
 			var targetElement = page.WebDriver.FindElement(By.Id(label.GetAttribute("for")));
 			return targetElement;
+		}
+
+		public static By ByPartialName(this BasePage page, string name)
+		{
+			return By.XPath($"//*[contains(@id,'{name}')]");
 		}
 	}
 }
