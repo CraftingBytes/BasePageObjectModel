@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -9,34 +8,34 @@ namespace BasePageObjectModel
 {
 	public static class BasePageExtensions
 	{
-		public static void Is<T>(this BasePage page)
-			where T : BasePage
+		public static void Is<T>(this BaseBasePage page)
+			where T : BaseBasePage
 		{
 			T castedPage = page.As<T>();
-			Assert.IsNotNull(castedPage);
+			ServiceRegistry.Assert.IsNotNull(castedPage);
 		}
 
-		public static T As<T>(this BasePage page)
-			where T : BasePage
+		public static T As<T>(this BaseBasePage page)
+			where T : BaseBasePage
 		{
 			return page as T;
 		}
 
-		public static void ClickLabel(this BasePage page, string labelText)
+		public static void ClickLabel(this BaseBasePage page, string labelText)
 		{
 			var label = FindLabel(page, labelText);
 
 			label.Click();
 		}
 
-		public static IWebElement FindLabel(this BasePage page, string labelText)
+		public static IWebElement FindLabel(this BaseBasePage page, string labelText)
 		{
 			var xpathToFind = string.Format("//label[contains(., '{0}')]", labelText);
 			var label = page.WebDriver.FindElement(By.XPath(xpathToFind));
 			return label;
 		}
 
-		public static void FillOutForm(this BasePage page, Dictionary<string, string> labelToValue)
+		public static void FillOutForm(this BaseBasePage page, Dictionary<string, string> labelToValue)
 		{
 			foreach (var kvp in labelToValue)
 			{
@@ -75,7 +74,7 @@ namespace BasePageObjectModel
 			return replaced;
 		}
 
-		public static void FillOutFormByNames(this BasePage page, Dictionary<string, string> namesAndValues)
+		public static void FillOutFormByNames(this BaseBasePage page, Dictionary<string, string> namesAndValues)
 		{
 			foreach (var nvp in namesAndValues)
 			{
@@ -84,7 +83,7 @@ namespace BasePageObjectModel
 			}
 		}
 
-		public static void FillOutFormByPartialNames(this BasePage page, Dictionary<string, string> namesAndValues)
+		public static void FillOutFormByPartialNames(this BaseBasePage page, Dictionary<string, string> namesAndValues)
 		{
 			foreach (KeyValuePair<string, string> namesAndValue in namesAndValues)
 			{
@@ -115,7 +114,7 @@ namespace BasePageObjectModel
 			}
 		}
 
-		public static void VerifyForm(this BasePage page, IDictionary<string, string> labelToValue)
+		public static void VerifyForm(this BaseBasePage page, IDictionary<string, string> labelToValue)
 		{
 			foreach (var kvp in labelToValue)
 			{
@@ -124,7 +123,7 @@ namespace BasePageObjectModel
 				if (targetElement.TagName == "input" || targetElement.TagName == "textarea")
 				{
 					var actualValue = targetElement.GetAttribute("value");
-					Assert.AreEqual(expectedValue, actualValue);
+					ServiceRegistry.Assert.AreEqual(expectedValue, actualValue);
 				}
 				else if (targetElement.TagName == "select")
 				{
@@ -138,19 +137,19 @@ namespace BasePageObjectModel
 					{
 						selectedText = select.SelectedOption.Text;
 					}
-					Assert.AreEqual(expectedValue, selectedText);
+					ServiceRegistry.Assert.AreEqual(expectedValue, selectedText);
 				}
 			}
 		}
 
-		private static IWebElement GetTargetElementForLabel(BasePage page, string labelText)
+		private static IWebElement GetTargetElementForLabel(BaseBasePage page, string labelText)
 		{
 			var label = page.FindLabel(labelText);
 			var targetElement = page.WebDriver.FindElement(By.Id(label.GetAttribute("for")));
 			return targetElement;
 		}
 
-		public static By ByPartialName(this BasePage page, string name)
+		public static By ByPartialName(this BaseBasePage page, string name)
 		{
 			return By.XPath($"//*[contains(@id,'{name}')]");
 		}

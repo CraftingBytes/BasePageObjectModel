@@ -5,11 +5,11 @@ using OpenQA.Selenium;
 
 namespace BasePageObjectModel
 {
-	public class BasePage : BaseElementContainer
+	public class BaseBasePage : BaseElementContainer
 	{
 		private Dictionary<string, string> queryString;
 
-		public BasePage(IWebDriver driver)
+		public BaseBasePage(IWebDriver driver)
 			: base(driver)
 		{
 			queryString = new Dictionary<string, string>();

@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace BasePageObjectModel
 {
-	public class WaitNavigationContext<TFrom> : BaseNavigationContext<TFrom> where TFrom : BasePage
+	public class WaitNavigationContext<TFrom> : BaseNavigationContext<TFrom> where TFrom : BaseBasePage
 	{
 		public WaitNavigationContext(IWebDriver driver, TFrom fromPage)
 			: base(driver, fromPage)
@@ -17,14 +17,14 @@ namespace BasePageObjectModel
 		}
 
 		public void To<T>()
-			where T : BasePage
+			where T : BaseBasePage
 		{
 			var target = PageManager.Current.GetMatchingPage<T>();
 			To(target);
 		}
 
 		public void To<T>(T target)
-			where T : BasePage
+			where T : BaseBasePage
 		{
 			AssertFailOnErrorPage(target);
 			AssertCorrectPageLoaded(target);

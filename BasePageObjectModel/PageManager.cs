@@ -38,22 +38,22 @@ namespace BasePageObjectModel
 			}
 		}
 
-		public T GetMatchingPage<T>() where T : BasePage
+		public T GetMatchingPage<T>() where T : BaseBasePage
 		{
 			return BasePages.FirstOrDefault(p => p.GetType() == typeof(T)) as T;
 		}
 
-		private BasePage[] GetPagesInAssembly()
+		private BaseBasePage[] GetPagesInAssembly()
 		{
 			var pages = from t in PageAssembly().Assembly.GetTypes()
-						where t.IsSubclassOf(typeof(BasePage))
+						where t.IsSubclassOf(typeof(BaseBasePage))
 							  && !t.IsAbstract
-						select (BasePage)Activator.CreateInstance(t, WebDriver);
+						select (BaseBasePage)Activator.CreateInstance(t, WebDriver);
 			return pages.ToArray();
 		}
 
-		public BasePage[] BasePages { get; set; }
-		public abstract BasePage CurrentPage { get; }
+		public BaseBasePage[] BasePages { get; set; }
+		public abstract BaseBasePage CurrentPage { get; }
 		public IWebDriver WebDriver { get; set; }
 		public Uri BaseUrl { get; set; }
 		protected abstract Type PageAssembly();

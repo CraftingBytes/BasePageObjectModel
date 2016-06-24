@@ -21,7 +21,7 @@ namespace BasePageObjectModel
 		}
 
 
-		public override BasePage CurrentPage
+		public override BaseBasePage CurrentPage
 		{
 			get
 			{
