@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
+using BasePageObjectModel.MSTest;
 
-namespace BasePageObjectModel.MSTest
+namespace BasePageObjectModel
 {
 	public class BasePage : BaseBasePage
 	{

@@ -234,3 +234,7 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+BasePageObjectModel.MsTest/NuGet/lib/
+BasePageObjectModel.Nunit/NuGet/lib/
+BasePageObjectModel.xUnit/NuGet/lib/
+BasePageObjectModel/NuGet/lib/
