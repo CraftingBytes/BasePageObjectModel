@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
+using BasePageObjectModel.xUnit;
 
-namespace BasePageObjectModel.xUnit
+namespace BasePageObjectModel
 {
 	public class BasePage : BaseBasePage
 	{
