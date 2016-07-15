@@ -70,7 +70,6 @@ namespace BasePageObjectModel
 			string replaced = value;
 			replaced = replaced.Replace("~ESC", "");
 			replaced = replaced.Replace("~ENTER", "");
-			//replaced = replaced.Replace("~PAUSE", "");
 			return replaced;
 		}
 
@@ -83,12 +82,12 @@ namespace BasePageObjectModel
 			}
 		}
 
-		public static void FillOutFormByPartialNames(this BaseBasePage page, Dictionary<string, string> namesAndValues)
+		public static void FillOutFormByPartialIds(this BaseBasePage page, Dictionary<string, string> idsAndValues)
 		{
-			foreach (KeyValuePair<string, string> namesAndValue in namesAndValues)
+			foreach (KeyValuePair<string, string> idAndValue in idsAndValues)
 			{
-				var element = page.WebDriver.FindElement(page.ByPartialName(namesAndValue.Key));
-				FillElement(element, namesAndValue.Value);
+				var element = page.WebDriver.FindElement(page.ByPartialId(idAndValue.Key));
+				FillElement(element, idAndValue.Value);
 			}
 		}
 
@@ -149,9 +148,9 @@ namespace BasePageObjectModel
 			return targetElement;
 		}
 
-		public static By ByPartialName(this BaseBasePage page, string name)
+		public static By ByPartialId(this BaseBasePage page, string id)
 		{
-			return By.XPath($"//*[contains(@id,'{name}')]");
+			return By.XPath($"//*[contains(@id,'{id}')]");
 		}
 	}
 }

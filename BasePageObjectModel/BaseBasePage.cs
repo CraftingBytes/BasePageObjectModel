@@ -41,15 +41,16 @@ namespace BasePageObjectModel
 			}
 		}
 
-		public void GoToUrl(string url)
+		public bool GoToUrl(string url)
 		{
+		    if (WebDriver.Url == url)
+		    {
+		        return true;
+		    }
+
 			WebDriver.Navigate().GoToUrl(url);
-			WaitExtensions.WaitFor(() =>
-			{
-				Debug.WriteLine(WebDriver.Url + " == " + url);
-				return CompareUrls(WebDriver.Url, url);
-			});
-		}
+            return WaitExtensions.WaitFor(() => CompareUrls(WebDriver.Url, url));
+        }
 
 		private bool CompareUrls(string left, string right)
 		{
