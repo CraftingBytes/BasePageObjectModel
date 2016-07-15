@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{91E7B7B6
 	ProjectSection(SolutionItems) = preProject
 		BasePageObjectModel.MSTest\NuGet\BasePageObjectModel.MsTest.nuspec = BasePageObjectModel.MSTest\NuGet\BasePageObjectModel.MsTest.nuspec
 		BasePageObjectModel.Nunit\NuGet\BasePageObjectModel.Nunit.nuspec = BasePageObjectModel.Nunit\NuGet\BasePageObjectModel.Nunit.nuspec
+		BasePageObjectModel\NuGet\BasePageObjectModel.nuspec = BasePageObjectModel\NuGet\BasePageObjectModel.nuspec
 		BasePageObjectModel.xUnit\NuGet\BasePageObjectModel.xUnit.nuspec = BasePageObjectModel.xUnit\NuGet\BasePageObjectModel.xUnit.nuspec
 	EndProjectSection
 EndProject
