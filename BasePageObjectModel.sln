@@ -1,16 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasePageObjectModel", "BasePageObjectModel\BasePageObjectModel.csproj", "{4C7FD6D2-DF5C-4E01-950A-91104B67883B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{91E7B7B6-78F9-4838-9791-3B53C6DDF1F0}"
 	ProjectSection(SolutionItems) = preProject
-		BasePageObjectModel.MSTest.nuspec = BasePageObjectModel.MSTest.nuspec
-		BasePageObjectModel.Nunit.nuspec = BasePageObjectModel.Nunit.nuspec
-		BasePageObjectModel.nuspec = BasePageObjectModel.nuspec
-		BasePageObjectModel.xUnit.nuspec = BasePageObjectModel.xUnit.nuspec
+		BasePageObjectModel.MSTest\NuGet\BasePageObjectModel.MsTest.nuspec = BasePageObjectModel.MSTest\NuGet\BasePageObjectModel.MsTest.nuspec
+		BasePageObjectModel.Nunit\NuGet\BasePageObjectModel.Nunit.nuspec = BasePageObjectModel.Nunit\NuGet\BasePageObjectModel.Nunit.nuspec
+		BasePageObjectModel.xUnit\NuGet\BasePageObjectModel.xUnit.nuspec = BasePageObjectModel.xUnit\NuGet\BasePageObjectModel.xUnit.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasePageObjectModel.MSTest", "BasePageObjectModel.MSTest\BasePageObjectModel.MSTest.csproj", "{1CD9876C-8639-4D90-8C47-FD86B5FC8F88}"
