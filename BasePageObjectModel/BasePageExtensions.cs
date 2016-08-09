@@ -152,5 +152,10 @@ namespace BasePageObjectModel
 		{
 			return By.XPath($"//*[contains(@id,'{id}')]");
 		}
+
+		public static By ByPartialName(this BasePage page, string name)
+		{
+			return By.XPath($"//*[contains(@name,'{name}')]");
+		}
 	}
 }
