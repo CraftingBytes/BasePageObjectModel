@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Linq;
+using OpenQA.Selenium.Chrome;
 
 namespace BasePageObjectModel
 {
@@ -15,13 +16,19 @@ namespace BasePageObjectModel
 
 		public virtual void Initialize()
 		{
-
+			if (WebDriver == null)
+			{
+				WebDriver = new ChromeDriver();
+			}
 		}
 
-		public void Dispose()
+		public virtual void Dispose()
 		{
-			WebDriver.Close();
-			WebDriver.Quit();
+			if (WebDriver != null)
+			{
+				WebDriver.Close();
+				WebDriver.Quit();
+			}
 		}
 
 		public static PageManager Current
@@ -31,7 +38,7 @@ namespace BasePageObjectModel
 			{
 				if (value == null)
 				{
-					throw new ArgumentNullException("value");
+					throw new ArgumentNullException(nameof(value));
 				}
 				_current = value;
 			}
