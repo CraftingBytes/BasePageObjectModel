@@ -9,14 +9,14 @@ namespace BasePageObjectModel
 {
     public static class WaitExtensions
     {
-        public static bool ClickAndWaitForLoad<T>(this T page, Action<T> action) where T : BaseBasePage
+        public static bool ClickAndWaitForLoad<T>(this T page, Action<T> action) where T : BasePage
         {
             string urlBeforeClick = page.WebDriver.Url;
             action(page);
             return page.WaitForLoad(urlBeforeClick);
         }
 
-        public static bool WaitForLoad(this BaseBasePage basePage, string urlBeforeClick)
+        public static bool WaitForLoad(this BasePage basePage, string urlBeforeClick)
         {
             return WaitFor(() => basePage.WebDriver.Url != urlBeforeClick);
         }

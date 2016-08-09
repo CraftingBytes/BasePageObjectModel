@@ -2,7 +2,7 @@
 
 namespace BasePageObjectModel.xUnit
 {
-	public class XUnitAssert : IAssert
+	public class XunitAssert : IAssert
 	{
 		public void Fail(string format, params object[] args)
 		{

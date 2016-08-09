@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using OpenQA.Selenium;
 
 namespace BasePageObjectModel
 {
-	public class BaseBasePage : BaseElementContainer
+	public class BasePage : BaseElementContainer
 	{
 		private Dictionary<string, string> queryString;
 
-		public BaseBasePage(IWebDriver driver)
+		public BasePage(IWebDriver driver)
 			: base(driver)
 		{
 			queryString = new Dictionary<string, string>();

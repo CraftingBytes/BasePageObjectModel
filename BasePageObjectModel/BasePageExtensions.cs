@@ -8,34 +8,34 @@ namespace BasePageObjectModel
 {
 	public static class BasePageExtensions
 	{
-		public static void Is<T>(this BaseBasePage page)
-			where T : BaseBasePage
+		public static void Is<T>(this BasePage page)
+			where T : BasePage
 		{
 			T castedPage = page.As<T>();
 			ServiceRegistry.Assert.IsNotNull(castedPage);
 		}
 
-		public static T As<T>(this BaseBasePage page)
-			where T : BaseBasePage
+		public static T As<T>(this BasePage page)
+			where T : BasePage
 		{
 			return page as T;
 		}
 
-		public static void ClickLabel(this BaseBasePage page, string labelText)
+		public static void ClickLabel(this BasePage page, string labelText)
 		{
 			var label = FindLabel(page, labelText);
 
 			label.Click();
 		}
 
-		public static IWebElement FindLabel(this BaseBasePage page, string labelText)
+		public static IWebElement FindLabel(this BasePage page, string labelText)
 		{
 			var xpathToFind = string.Format("//label[contains(., '{0}')]", labelText);
 			var label = page.WebDriver.FindElement(By.XPath(xpathToFind));
 			return label;
 		}
 
-		public static void FillOutForm(this BaseBasePage page, Dictionary<string, string> labelToValue)
+		public static void FillOutForm(this BasePage page, Dictionary<string, string> labelToValue)
 		{
 			foreach (var kvp in labelToValue)
 			{
@@ -73,7 +73,7 @@ namespace BasePageObjectModel
 			return replaced;
 		}
 
-		public static void FillOutFormByNames(this BaseBasePage page, Dictionary<string, string> namesAndValues)
+		public static void FillOutFormByNames(this BasePage page, Dictionary<string, string> namesAndValues)
 		{
 			foreach (var nvp in namesAndValues)
 			{
@@ -82,7 +82,7 @@ namespace BasePageObjectModel
 			}
 		}
 
-		public static void FillOutFormByPartialIds(this BaseBasePage page, Dictionary<string, string> idsAndValues)
+		public static void FillOutFormByPartialIds(this BasePage page, Dictionary<string, string> idsAndValues)
 		{
 			foreach (KeyValuePair<string, string> idAndValue in idsAndValues)
 			{
@@ -113,7 +113,7 @@ namespace BasePageObjectModel
 			}
 		}
 
-		public static void VerifyForm(this BaseBasePage page, IDictionary<string, string> labelToValue)
+		public static void VerifyForm(this BasePage page, IDictionary<string, string> labelToValue)
 		{
 			foreach (var kvp in labelToValue)
 			{
@@ -141,14 +141,14 @@ namespace BasePageObjectModel
 			}
 		}
 
-		private static IWebElement GetTargetElementForLabel(BaseBasePage page, string labelText)
+		private static IWebElement GetTargetElementForLabel(BasePage page, string labelText)
 		{
 			var label = page.FindLabel(labelText);
 			var targetElement = page.WebDriver.FindElement(By.Id(label.GetAttribute("for")));
 			return targetElement;
 		}
 
-		public static By ByPartialId(this BaseBasePage page, string id)
+		public static By ByPartialId(this BasePage page, string id)
 		{
 			return By.XPath($"//*[contains(@id,'{id}')]");
 		}

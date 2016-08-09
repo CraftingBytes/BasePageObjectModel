@@ -3,14 +3,14 @@ using BasePageObjectModel.MSTest;
 
 namespace BasePageObjectModel
 {
-	public class BasePage : BaseBasePage
+	public class MsTestBasePage : BasePage
 	{
-		static BasePage()
+		static MsTestBasePage()
 		{
 			ServiceRegistry.Assert = new MsTestAssert();
 		}
 
-		public BasePage(IWebDriver driver) : base(driver)
+		public MsTestBasePage(IWebDriver driver) : base(driver)
 		{
 		}
 	}

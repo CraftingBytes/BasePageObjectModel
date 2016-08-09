@@ -44,12 +44,12 @@ namespace BasePageObjectModel
 			}
 		}
 
-		public T GetMatchingPage<T>() where T : BaseBasePage
+		public T GetMatchingPage<T>() where T : BasePage
 		{
 			return BasePages.FirstOrDefault(p => p.GetType() == typeof(T)) as T;
 		}
 
-		public virtual BaseBasePage CurrentPage
+		public virtual BasePage CurrentPage
 		{
 			get
 			{
@@ -57,17 +57,17 @@ namespace BasePageObjectModel
 			}
 		}
 
-		protected BaseBasePage[] GetPagesInAssembly(PageManager pageManager)
+		protected BasePage[] GetPagesInAssembly(PageManager pageManager)
 		{
 			var pages = from t in GetType().Assembly.GetTypes()
-						where t.IsSubclassOf(typeof(BaseBasePage))
+						where t.IsSubclassOf(typeof(BasePage))
 							  && !t.IsAbstract
-						select (BaseBasePage)Activator.CreateInstance(t, WebDriver);
+						select (BasePage)Activator.CreateInstance(t, WebDriver);
 			return pages.ToArray();
 		}
 		
-		private readonly Lazy<BaseBasePage[]> basePages = new Lazy<BaseBasePage[]>(() => Current.GetPagesInAssembly(Current));
-		public BaseBasePage[] BasePages => basePages.Value;
+		private readonly Lazy<BasePage[]> basePages = new Lazy<BasePage[]>(() => Current.GetPagesInAssembly(Current));
+		public BasePage[] BasePages => basePages.Value;
 
 		public IWebDriver WebDriver { get; set; }
 		public Uri BaseUrl { get; set; }

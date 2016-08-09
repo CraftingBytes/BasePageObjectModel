@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace BasePageObjectModel
 {
-	public class UriTemplatedBasePage : BaseBasePage
+	public class UriTemplatedBasePage : BasePage
 	{
 		protected UriTemplate PageUriTemplate { get; set; }
 

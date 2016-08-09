@@ -3,14 +3,14 @@ using OpenQA.Selenium;
 
 namespace BasePageObjectModel
 {
-	public class BasePage : BaseBasePage
+	public class NunitBasePage : BasePage
 	{
-		static BasePage()
+		static NunitBasePage()
 		{
 			ServiceRegistry.Assert = new NunitAssert();
 		}
 
-		public BasePage(IWebDriver driver) : base(driver)
+		public NunitBasePage(IWebDriver driver) : base(driver)
 		{
 		}
 	}

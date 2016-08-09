@@ -2,14 +2,14 @@
 {
     public static class Navigate
     {
-        public static void LoadPage<T>() where T : BaseBasePage, new()
+        public static void LoadPage<T>() where T : BasePage, new()
         {
             var page = new T { WebDriver = PageManager.Current.WebDriver };
             page.ClickAndWaitForLoad(m => m.GoTo());
         }
 
         public static WaitNavigationContext<T> From<T>()
-            where T : BaseBasePage
+            where T : BasePage
         {
             var currentPage = PageManager.Current.CurrentPage;
             ServiceRegistry.Assert.IsNotNull(currentPage, "currentPage should not be null.");

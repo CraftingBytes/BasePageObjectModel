@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace TestPageObjectModel
 {
-	public class HomePage :BasePage	
+	public class HomePage : NunitBasePage
 	{
 		public HomePage(IWebDriver driver) : base(driver)
 		{

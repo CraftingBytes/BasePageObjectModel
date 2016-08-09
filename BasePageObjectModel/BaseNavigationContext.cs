@@ -19,7 +19,7 @@ namespace BasePageObjectModel
 
 
 		protected void AssertCorrectPageLoaded<T>(T target)
-			where T : BaseBasePage
+			where T : BasePage
 		{
 			var isDisplayed = target.IsUrlDisplayed();
 			if (!isDisplayed)
@@ -29,7 +29,7 @@ namespace BasePageObjectModel
 		}
 
 		protected void AssertFailOnErrorPage<T>(T target)
-			where T : BaseBasePage
+			where T : BasePage
 		{
 			var bodyText = target.WebDriver.PageSource;
 			if (bodyText.Contains("Server Error in "))
