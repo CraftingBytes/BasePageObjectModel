@@ -1,12 +1,14 @@
-﻿using OpenQA.Selenium.Firefox;
-using System;
-using System.Linq;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium.Chrome;
 
 namespace BasePageObjectModel
 {
 	public class DefaultPageManager : PageManager
 	{
+		protected DefaultPageManager(string baseUrl) 
+			: base(baseUrl)
+		{
+		}
+
 		public override void Initialize()
 		{
 			if (WebDriver == null)
@@ -19,20 +21,6 @@ namespace BasePageObjectModel
 
 			base.Initialize();
 		}
-
-
-		public override BaseBasePage CurrentPage
-		{
-			get
-			{
-				return BasePages.FirstOrDefault(page => page.IsUrlDisplayed());
-			}
-		}
-
-
-		protected override Type PageAssembly()
-		{
-			return GetType();
-		}
+		
 	}
 }

@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using System;
 using System.Linq;
 
 namespace BasePageObjectModel
 {
-	public abstract class PageManager
+	public class PageManager : IDisposable
 	{
 		private static PageManager _current;
 
-		static PageManager()
+		public PageManager(string baseUrl)
 		{
-			_current = new DefaultPageManager();
+			BaseUrl = new Uri(baseUrl);
 		}
 
 		public virtual void Initialize()
 		{
-			BasePages = GetPagesInAssembly();
+
 		}
 
 		public void Dispose()
@@ -43,19 +42,27 @@ namespace BasePageObjectModel
 			return BasePages.FirstOrDefault(p => p.GetType() == typeof(T)) as T;
 		}
 
-		private BaseBasePage[] GetPagesInAssembly()
+		public virtual BaseBasePage CurrentPage
 		{
-			var pages = from t in PageAssembly().Assembly.GetTypes()
+			get
+			{
+				return BasePages.FirstOrDefault(page => page.IsUrlDisplayed());
+			}
+		}
+
+		protected BaseBasePage[] GetPagesInAssembly(PageManager pageManager)
+		{
+			var pages = from t in GetType().Assembly.GetTypes()
 						where t.IsSubclassOf(typeof(BaseBasePage))
 							  && !t.IsAbstract
 						select (BaseBasePage)Activator.CreateInstance(t, WebDriver);
 			return pages.ToArray();
 		}
+		
+		private readonly Lazy<BaseBasePage[]> basePages = new Lazy<BaseBasePage[]>(() => Current.GetPagesInAssembly(Current));
+		public BaseBasePage[] BasePages => basePages.Value;
 
-		public BaseBasePage[] BasePages { get; set; }
-		public abstract BaseBasePage CurrentPage { get; }
 		public IWebDriver WebDriver { get; set; }
 		public Uri BaseUrl { get; set; }
-		protected abstract Type PageAssembly();
 	}
 }
