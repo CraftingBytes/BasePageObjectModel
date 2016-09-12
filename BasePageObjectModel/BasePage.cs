@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace BasePageObjectModel
 {
 	public class BasePage : BaseElementContainer
 	{
-		private Dictionary<string, string> queryString;
+		private readonly Dictionary<string, string> queryString;
 
 		public BasePage(IWebDriver driver)
 			: base(driver)
@@ -30,7 +31,6 @@ namespace BasePageObjectModel
 			PageUrl = uri.ToString();
 		}
 
-
 		public void SetQueryStringValue(string key, string value)
 		{
 			queryString[key] = value;
@@ -42,23 +42,13 @@ namespace BasePageObjectModel
 
 		public bool GoToUrl(string url)
 		{
-		    if (WebDriver.Url == url)
-		    {
-		        return true;
-		    }
+			if (WebDriver.Url == url)
+			{
+				return true;
+			}
 
 			WebDriver.Navigate().GoToUrl(url);
-            return WaitExtensions.WaitFor(() => CompareUrls(WebDriver.Url, url));
-        }
-
-		internal bool CompareUrls(string left, string right)
-		{
-			var leftUrl = new Uri(left);
-			var rightUrl = new Uri(right);
-
-			return Uri.Compare(leftUrl, rightUrl,
-				UriComponents.Path, UriFormat.Unescaped,
-				StringComparison.InvariantCultureIgnoreCase) == 0;
+			return IsUrlDisplayed();
 		}
 
 		public void GoTo()
@@ -82,12 +72,13 @@ namespace BasePageObjectModel
 			{
 				return false;
 			}
-			return CompareUrls(WebDriver.Url, PageUrl);
+
+			return new WebDriverWait(WebDriver, TimeSpan.FromMilliseconds(2000)).Until(ExpectedConditions.UrlContains(new Uri(PageUrl).GetLeftPart(UriPartial.Authority)));
 		}
 
 		public void ScrollToBottomOfScreen()
 		{
-			IJavaScriptExecutor jse = ((IJavaScriptExecutor)WebDriver);
+			var jse = (IJavaScriptExecutor)WebDriver;
 			jse.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
 		}
 

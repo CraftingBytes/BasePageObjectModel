@@ -35,6 +35,5 @@ namespace TestSpecs
 		{
 			Assert.IsTrue(Pages.Second.IsUrlDisplayed());
 		}
-
 	}
 }
