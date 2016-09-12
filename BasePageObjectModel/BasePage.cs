@@ -51,7 +51,7 @@ namespace BasePageObjectModel
             return WaitExtensions.WaitFor(() => CompareUrls(WebDriver.Url, url));
         }
 
-		private bool CompareUrls(string left, string right)
+		internal bool CompareUrls(string left, string right)
 		{
 			var leftUrl = new Uri(left);
 			var rightUrl = new Uri(right);

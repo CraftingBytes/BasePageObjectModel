@@ -14,5 +14,10 @@ namespace TestPageObjectModel
 		{
 			return WebDriver.FindElement(By.Id("title")).Text;
 		}
+
+		public void ClickSecondPageLink()
+		{
+			WebDriver.FindElement(By.Id("secondPageLink")).Click();
+		}
 	}
 }

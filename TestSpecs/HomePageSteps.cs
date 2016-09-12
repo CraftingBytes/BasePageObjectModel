@@ -21,5 +21,20 @@ namespace TestSpecs
 			var title = Pages.Home.GetTitle();
 			Assert.IsNotNull(title);
 		}
+
+		[When(@"I click on the second page link")]
+		public void WhenIClickOnTheSecondPageLink()
+		{
+			Navigate.From<HomePage>()
+				.Using(hp => hp.ClickSecondPageLink())
+				.To<SecondPage>();
+		}
+
+		[Then(@"I should be on the second page")]
+		public void ThenIShouldBeOnTheSecondPage()
+		{
+			Assert.IsTrue(Pages.Second.IsUrlDisplayed());
+		}
+
 	}
 }

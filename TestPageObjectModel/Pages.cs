@@ -11,5 +11,6 @@ namespace TestPageObjectModel
 		}
 
 		public static HomePage Home => Current.BasePages.OfType<HomePage>().Single();
+		public static SecondPage Second => Current.BasePages.OfType<SecondPage>().Single();
 	}
 }
