@@ -66,6 +66,16 @@ namespace BasePageObjectModel
 			GoTo("test", "reset");
 		}
 
+		private bool CompareUrls(string left, string right)
+		{
+			var leftUrl = new Uri(left);
+			var rightUrl = new Uri(right);
+
+			return Uri.Compare(leftUrl, rightUrl,
+				UriComponents.Path, UriFormat.Unescaped,
+				StringComparison.InvariantCultureIgnoreCase) == 0;
+		}
+
 		public virtual bool IsUrlDisplayed()
 		{
 			if (string.IsNullOrEmpty(PageUrl))
@@ -73,7 +83,7 @@ namespace BasePageObjectModel
 				return false;
 			}
 
-			return new WebDriverWait(WebDriver, TimeSpan.FromMilliseconds(2000)).Until(ExpectedConditions.UrlContains(new Uri(PageUrl).GetLeftPart(UriPartial.Authority)));
+			return CompareUrls(PageUrl, WebDriver.Url);
 		}
 
 		public void ScrollToBottomOfScreen()
