@@ -2,12 +2,12 @@
 
 namespace BasePageObjectModel
 {
-    public class BasePopup : BaseElementContainer
-    {
-        protected BasePopup(IWebDriver driver)
-            : base(driver)
-        {
-            WebDriver = driver;
-        }
-    }
+	public class BasePopup : BaseElementContainer
+	{
+		protected BasePopup(IWebDriver driver)
+			: base(driver)
+		{
+			WebDriver = driver;
+		}
+	}
 }

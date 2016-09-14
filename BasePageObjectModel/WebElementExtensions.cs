@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace BasePageObjectModel
 {
@@ -74,6 +76,33 @@ namespace BasePageObjectModel
 		public static List<string[]> ToTableBody(this IWebElement element)
 		{
 			return element.ToTable().Skip(1).ToList();
+		}
+
+		public static IWebElement GetElement(this IWebElement element, By by, TimeSpan? waitTime = null)
+		{
+			var defaultWait = new DefaultWait<IWebElement>(element)
+			{
+				Timeout = waitTime ?? TimeSpan.FromSeconds(1)
+			};
+
+			return defaultWait.Until(e =>
+			{
+				var firstOrDefault = e.FindElements(by).FirstOrDefault();
+				return firstOrDefault?.Displayed == true ? firstOrDefault : null;
+			});
+		}
+
+		public static ReadOnlyCollection<IWebElement> GetElements(this IWebElement element, By by, TimeSpan? waitTime = null)
+		{
+			var defaultWait = new DefaultWait<IWebElement>(element)
+			{
+				Timeout = waitTime ?? TimeSpan.FromSeconds(1)
+			};
+			return defaultWait.Until(e =>
+			{
+				var elements = e.FindElements(by);
+				return elements?.Any() == true ? elements : null;
+			});
 		}
 	}
 }

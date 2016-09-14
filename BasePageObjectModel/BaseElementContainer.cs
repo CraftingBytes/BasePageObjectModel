@@ -172,5 +172,10 @@ namespace BasePageObjectModel
 		{
 			return new WebDriverWait(WebDriver, waitTime ?? TimeSpan.FromSeconds(1)).Until(expectedCondition != null ? expectedCondition(by) : ExpectedConditions.ElementIsVisible(by));
 		}
+
+		public ReadOnlyCollection<IWebElement> GetElements(By by, TimeSpan? waitTime = null)
+		{
+			return new WebDriverWait(WebDriver, waitTime ?? TimeSpan.FromSeconds(1)).Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
+		}
 	}
 }

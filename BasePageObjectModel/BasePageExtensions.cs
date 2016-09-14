@@ -98,7 +98,7 @@ namespace BasePageObjectModel
 			if ((webElement.TagName == "input" && (type == "text" || type == "tel" || type == "email" || type == "password" || type == "search")
 				|| webElement.TagName == "textarea"))
 			{
-                webElement.Clear();
+				webElement.Clear();
 				webElement.SendKeys(value);
 			}
 			else if (webElement.TagName == "select")

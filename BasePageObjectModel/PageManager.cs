@@ -65,7 +65,7 @@ namespace BasePageObjectModel
 						select (BasePage)Activator.CreateInstance(t, WebDriver);
 			return pages.ToArray();
 		}
-		
+
 		private readonly Lazy<BasePage[]> basePages = new Lazy<BasePage[]>(() => Current.GetPagesInAssembly(Current));
 		public BasePage[] BasePages => basePages.Value;
 
