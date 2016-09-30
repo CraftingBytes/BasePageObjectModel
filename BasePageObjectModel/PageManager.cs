@@ -14,8 +14,9 @@ namespace BasePageObjectModel
 			BaseUrl = new Uri(baseUrl);
 		}
 
-		public virtual void Initialize()
+		public virtual void Initialize(IWebDriver webDriver = null)
 		{
+			WebDriver = webDriver;
 			if (WebDriver == null)
 			{
 				WebDriver = new ChromeDriver();

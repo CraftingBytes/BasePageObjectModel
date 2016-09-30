@@ -16,6 +16,8 @@ namespace BasePageObjectModel
 
 		public string PageUrl { get; private set; }
 
+		protected UriTemplate PageUriTemplate { get; set; }
+
 		public void SetPageUrl(string value)
 		{
 			var uri = new Uri(PageManager.Current.BaseUrl, value);
@@ -65,16 +67,6 @@ namespace BasePageObjectModel
 			GoTo("test", "reset");
 		}
 
-		private bool CompareUrls(string left, string right)
-		{
-			var leftUrl = new Uri(left);
-			var rightUrl = new Uri(right);
-
-			return Uri.Compare(leftUrl, rightUrl,
-				UriComponents.Path, UriFormat.Unescaped,
-				StringComparison.InvariantCultureIgnoreCase) == 0;
-		}
-
 		public virtual bool IsUrlDisplayed()
 		{
 			if (string.IsNullOrEmpty(PageUrl))
@@ -82,7 +74,16 @@ namespace BasePageObjectModel
 				return false;
 			}
 
-			return CompareUrls(PageUrl, WebDriver.Url);
+			if (PageUriTemplate == null)
+			{
+				return Uri.Compare(new Uri(PageUrl), new Uri(WebDriver.Url),
+					UriComponents.Path, UriFormat.Unescaped,
+					StringComparison.InvariantCultureIgnoreCase) == 0;
+			}
+			var uriActual = new Uri(WebDriver.Url);
+			var actualUrlLeftPart = uriActual.GetLeftPart(UriPartial.Path);
+			var match = PageUriTemplate.Match(PageManager.Current.BaseUrl, new Uri(actualUrlLeftPart));
+			return match != null;
 		}
 
 		public void ScrollToBottomOfScreen()
