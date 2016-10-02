@@ -48,7 +48,7 @@ namespace BasePageObjectModel
 					targetElement = page.WebDriver.SwitchTo().ActiveElement();
 				}
 				var replaced = StripKeysFromText(kvp.Value);
-				FillElement(targetElement, replaced);
+				targetElement.FillElement(replaced);
 				HandleSpecialKeys(kvp.Value, targetElement);
 			}
 		}
@@ -78,7 +78,7 @@ namespace BasePageObjectModel
 			foreach (var nvp in namesAndValues)
 			{
 				var element = page.WebDriver.FindElement(By.Name(nvp.Key));
-				FillElement(element, nvp.Value);
+				element.FillElement(nvp.Value);
 			}
 		}
 
@@ -87,29 +87,7 @@ namespace BasePageObjectModel
 			foreach (KeyValuePair<string, string> idAndValue in idsAndValues)
 			{
 				var element = page.WebDriver.FindElement(page.ByPartialId(idAndValue.Key));
-				FillElement(element, idAndValue.Value);
-			}
-		}
-
-		public static void FillElement(IWebElement webElement, string value)
-		{
-			var type = webElement.GetAttribute("type").ToLower();
-
-			if ((webElement.TagName == "input" && (type == "text" || type == "tel" || type == "email" || type == "password" || type == "search")
-				|| webElement.TagName == "textarea"))
-			{
-				webElement.Clear();
-				webElement.SendKeys(value);
-			}
-			else if (webElement.TagName == "select")
-			{
-				var select = new SelectElement(webElement);
-				select.SelectByText(value);
-			}
-			else if (webElement.TagName == "input" && (type == "checkbox" || type == "radio"))
-			{
-				// TODO: Is there anyway to manage selection here? Or is that out of scope?
-				webElement.Click();
+				element.FillElement(idAndValue.Value);
 			}
 		}
 

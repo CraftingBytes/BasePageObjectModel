@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>BasePageObjectModel</id>
-		<version>1.2.6.0</version>
+		<version>1.2.7.0</version>
 		<title>BasePageObjectModel</title>
 		<authors>CraftingBytes</authors>
 		<owners>CraftingBytes</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Base assembly for PageObjectModels</description>
-		<releaseNotes>Moved UriTemplate into BasePage</releaseNotes>
+		<releaseNotes>Increased timeout and moved FillElement to an extension</releaseNotes>
 		<copyright>Copyright 2016</copyright>
 		<tags>Selenium PageObjectModel</tags>
 		<dependencies>

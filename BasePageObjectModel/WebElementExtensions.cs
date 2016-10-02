@@ -82,7 +82,7 @@ namespace BasePageObjectModel
 		{
 			var defaultWait = new DefaultWait<IWebElement>(element)
 			{
-				Timeout = waitTime ?? TimeSpan.FromSeconds(1)
+				Timeout = waitTime ?? TimeSpan.FromSeconds(5)
 			};
 
 			return defaultWait.Until(e =>
@@ -96,7 +96,7 @@ namespace BasePageObjectModel
 		{
 			var defaultWait = new DefaultWait<IWebElement>(element)
 			{
-				Timeout = waitTime ?? TimeSpan.FromSeconds(1)
+				Timeout = waitTime ?? TimeSpan.FromSeconds(5)
 			};
 			return defaultWait.Until(e =>
 			{
@@ -104,5 +104,28 @@ namespace BasePageObjectModel
 				return elements?.Any() == true ? elements : null;
 			});
 		}
+
+		public static void FillElement(this IWebElement webElement, string value)
+		{
+			var type = webElement.GetAttribute("type").ToLower();
+
+			if ((webElement.TagName == "input" && (type == "text" || type == "tel" || type == "email" || type == "password" || type == "search")
+				|| webElement.TagName == "textarea"))
+			{
+				webElement.Clear();
+				webElement.SendKeys(value);
+			}
+			else if (webElement.TagName == "select")
+			{
+				var select = new SelectElement(webElement);
+				select.SelectByText(value);
+			}
+			else if (webElement.TagName == "input" && (type == "checkbox" || type == "radio"))
+			{
+				// TODO: Is there anyway to manage selection here? Or is that out of scope?
+				webElement.Click();
+			}
+		}
+
 	}
 }
