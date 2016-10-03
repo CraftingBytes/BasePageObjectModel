@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace BasePageObjectModel
 {
+	/// <summary>
+	/// The BaseElementContainer is either a page or a window that contains elements
+	/// </summary>
 	public abstract class BaseElementContainer
 	{
 		protected BaseElementContainer(IWebDriver webDriver)
@@ -23,8 +26,6 @@ namespace BasePageObjectModel
 			Screenshot ss = ((ITakesScreenshot)WebDriver).GetScreenshot();
 
 			//Use it as you want now
-			string screenshot = ss.AsBase64EncodedString;
-			byte[] screenshotAsByteArray = ss.AsByteArray;
 			var fileName = GetType() + ".png";
 			ss.SaveAsFile(fileName, ImageFormat.Png);
 			return Path.GetFullPath(fileName);

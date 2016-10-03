@@ -109,8 +109,8 @@ namespace BasePageObjectModel
 		{
 			var type = webElement.GetAttribute("type").ToLower();
 
-			if ((webElement.TagName == "input" && (type == "text" || type == "tel" || type == "email" || type == "password" || type == "search")
-				|| webElement.TagName == "textarea"))
+			if ((webElement.TagName == "input" && (type == "text" || type == "file" || type == "tel" || type == "email" || type == "password" || type == "search"))
+				|| webElement.TagName == "textarea")
 			{
 				webElement.Clear();
 				webElement.SendKeys(value);
