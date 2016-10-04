@@ -74,15 +74,16 @@ namespace BasePageObjectModel
 					var minimumParameterCount = pageType.GetConstructors().Min(construct => construct.GetParameters().Count());
 					var constructorToUse = pageType.GetConstructors().First(construct => construct.GetParameters().Count() == minimumParameterCount);
 
-					var paramNullList = new object[minimumParameterCount];
+					var paramList = new object[minimumParameterCount];
+					paramList[0] = WebDriver;
 
 					var parameters = constructorToUse.GetParameters();
-					for (int i = 0; i < minimumParameterCount; i++)
+					for (int i = 1; i < minimumParameterCount; i++)
 					{
-						paramNullList[i] = parameters[i].ParameterType.IsValueType ? Activator.CreateInstance(parameters[i].ParameterType) : null;
+						paramList[i] = parameters[i].ParameterType.IsValueType ? Activator.CreateInstance(parameters[i].ParameterType) : null;
 					}
 
-					BasePage basePage = (BasePage)Activator.CreateInstance(pageType, paramNullList);
+					BasePage basePage = (BasePage)Activator.CreateInstance(pageType, paramList);
 					pages.Add(basePage);
 				}
 			}
