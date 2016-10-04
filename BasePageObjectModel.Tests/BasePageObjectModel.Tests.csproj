@@ -65,7 +65,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BasePageTests.cs" />
+    <Compile Include="Helpers\FooIdPage.cs" />
+    <Compile Include="Helpers\FooPage.cs" />
+    <Compile Include="Helpers\FooPages.cs" />
+    <Compile Include="PageManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\WebDriverFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BasePageObjectModel\BasePageObjectModel.csproj">

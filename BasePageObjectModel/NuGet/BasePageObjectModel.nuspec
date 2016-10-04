@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>BasePageObjectModel</id>
-		<version>1.2.8.0</version>
+		<version>1.2.9.0</version>
 		<title>BasePageObjectModel</title>
 		<authors>CraftingBytes</authors>
 		<owners>CraftingBytes</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Base assembly for PageObjectModels</description>
-		<releaseNotes>Allow FillElement to fill out input type=file</releaseNotes>
+		<releaseNotes>GetBasePages can fill in parameter templates</releaseNotes>
 		<copyright>Copyright 2016</copyright>
 		<tags>Selenium PageObjectModel</tags>
 		<dependencies>
