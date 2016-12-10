@@ -30,8 +30,8 @@ namespace BasePageObjectModel
 
 		public static IWebElement FindLabel(this BasePage page, string labelText)
 		{
-			var xpathToFind = string.Format("//label[contains(., '{0}')]", labelText);
-			var label = page.WebDriver.FindElement(By.XPath(xpathToFind));
+			var xpathToFind = $"//label[contains(., '{labelText}')]";
+			var label = page.GetElement(By.XPath(xpathToFind));
 			return label;
 		}
 
@@ -77,7 +77,7 @@ namespace BasePageObjectModel
 		{
 			foreach (var nvp in namesAndValues)
 			{
-				var element = page.WebDriver.FindElement(By.Name(nvp.Key));
+				var element = page.GetElement(By.Name(nvp.Key));
 				element.FillElement(nvp.Value);
 			}
 		}
@@ -86,7 +86,7 @@ namespace BasePageObjectModel
 		{
 			foreach (KeyValuePair<string, string> idAndValue in idsAndValues)
 			{
-				var element = page.WebDriver.FindElement(page.ByPartialId(idAndValue.Key));
+				var element = page.GetElement(page.ByPartialId(idAndValue.Key));
 				element.FillElement(idAndValue.Value);
 			}
 		}
@@ -122,7 +122,7 @@ namespace BasePageObjectModel
 		private static IWebElement GetTargetElementForLabel(BasePage page, string labelText)
 		{
 			var label = page.FindLabel(labelText);
-			var targetElement = page.WebDriver.FindElement(By.Id(label.GetAttribute("for")));
+			var targetElement = page.GetElement(By.Id(label.GetAttribute("for")));
 			return targetElement;
 		}
 
