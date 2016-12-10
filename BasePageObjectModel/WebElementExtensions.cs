@@ -109,13 +109,7 @@ namespace BasePageObjectModel
 		{
 			var type = webElement.GetAttribute("type").ToLower();
 
-			if ((webElement.TagName == "input" && (type == "text" || type == "file" || type == "tel" || type == "email" || type == "password" || type == "search"))
-				|| webElement.TagName == "textarea")
-			{
-				webElement.Clear();
-				webElement.SendKeys(value);
-			}
-			else if (webElement.TagName == "select")
+			if (webElement.TagName == "select")
 			{
 				var select = new SelectElement(webElement);
 				select.SelectByText(value);
@@ -124,6 +118,11 @@ namespace BasePageObjectModel
 			{
 				// TODO: Is there anyway to manage selection here? Or is that out of scope?
 				webElement.Click();
+			}
+			else
+			{
+				webElement.Clear();
+				webElement.SendKeys(value);
 			}
 		}
 
