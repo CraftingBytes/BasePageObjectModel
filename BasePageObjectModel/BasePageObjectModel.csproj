@@ -60,6 +60,7 @@
     <Compile Include="BasePage.cs" />
     <Compile Include="BasePageExtensions.cs" />
     <Compile Include="BasePopup.cs" />
+    <Compile Include="EditFormHelpers.cs" />
     <Compile Include="IAssert.cs" />
     <Compile Include="Navigate.cs" />
     <Compile Include="PageManager.cs" />

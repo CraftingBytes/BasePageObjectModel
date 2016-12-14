@@ -65,6 +65,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BasePageTests.cs" />
+    <Compile Include="EditFormHelperTests.cs" />
     <Compile Include="Helpers\FooIdPage.cs" />
     <Compile Include="Helpers\FooPage.cs" />
     <Compile Include="Helpers\FooPages.cs" />

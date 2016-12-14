@@ -97,12 +97,7 @@ namespace BasePageObjectModel
 			{
 				var targetElement = GetTargetElementForLabel(page, kvp.Key);
 				var expectedValue = StripKeysFromText(kvp.Value);
-				if (targetElement.TagName == "input" || targetElement.TagName == "textarea")
-				{
-					var actualValue = targetElement.GetAttribute("value");
-					ServiceRegistry.Assert.AreEqual(expectedValue, actualValue);
-				}
-				else if (targetElement.TagName == "select")
+				if (targetElement.TagName == "select")
 				{
 					var select = new SelectElement(targetElement);
 					string selectedText;
@@ -115,6 +110,17 @@ namespace BasePageObjectModel
 						selectedText = select.SelectedOption.Text;
 					}
 					ServiceRegistry.Assert.AreEqual(expectedValue, selectedText);
+				}
+				if (targetElement.TagName == "input" || targetElement.TagName == "textarea")
+				{
+					var inputType = targetElement.GetAttribute("type");
+					if (inputType == "date")
+					{
+						var textValue = targetElement.Text;
+						ServiceRegistry.Assert.AreEqual(expectedValue, textValue);
+					}
+					var actualValue = targetElement.GetAttribute("value");
+					ServiceRegistry.Assert.AreEqual(expectedValue, actualValue);
 				}
 			}
 		}

@@ -121,7 +121,14 @@ namespace BasePageObjectModel
 			}
 			else
 			{
-				webElement.Clear();
+				if (type == "date")
+				{
+					value = value.Replace("/", "");
+				}
+				else
+				{
+					webElement.Clear();
+				}
 				webElement.SendKeys(value);
 			}
 		}

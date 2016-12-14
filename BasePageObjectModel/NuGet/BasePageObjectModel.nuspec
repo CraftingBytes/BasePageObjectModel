@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>BasePageObjectModel</id>
-		<version>1.2.10</version>
+		<version>1.2.12</version>
 		<title>BasePageObjectModel</title>
 		<authors>CraftingBytes</authors>
 		<owners>CraftingBytes</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Base assembly for PageObjectModels</description>
-		<releaseNotes>GetBasePages can fill in parameter templates</releaseNotes>
+		<releaseNotes>Fix Date entering and checking</releaseNotes>
 		<copyright>Copyright 2016</copyright>
 		<tags>Selenium PageObjectModel</tags>
 		<dependencies>
