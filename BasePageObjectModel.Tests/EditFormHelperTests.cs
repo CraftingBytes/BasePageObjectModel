@@ -14,13 +14,16 @@ namespace BasePageObjectModel.Tests
 		public void TestGetNewDateText_NoPlaceholder()
 		{
 			Assert.AreEqual("", EditFormHelper.GetNewDateTextInternal("", null));
-			Assert.AreEqual("2/1/1983", EditFormHelper.GetNewDateTextInternal("01/01/1983", null));
-			Assert.AreEqual("2/12/1983", EditFormHelper.GetNewDateTextInternal("1/12/1983", null));
-			Assert.AreEqual("1/1/1984", EditFormHelper.GetNewDateTextInternal("12/1/1983", null));
-			Assert.AreEqual("1/12/1984", EditFormHelper.GetNewDateTextInternal("12/12/1983", null));
+			Assert.AreEqual("02/01/1983", EditFormHelper.GetNewDateTextInternal("01/01/1983", null));
+			Assert.AreEqual("02/12/1983", EditFormHelper.GetNewDateTextInternal("1/12/1983", null));
+			Assert.AreEqual("12/02/1983", EditFormHelper.GetNewDateTextInternal("12/1/1983", null));
+			Assert.AreEqual("01/12/1983", EditFormHelper.GetNewDateTextInternal("12/12/1983", null));
 			// if one is above then the lower must be manipulated
 			Assert.AreEqual("13/03/1983", EditFormHelper.GetNewDateTextInternal("13/02/1983", null));
-			Assert.AreEqual("3/13/1983", EditFormHelper.GetNewDateTextInternal("02/13/1983", null));
+			Assert.AreEqual("03/13/1983", EditFormHelper.GetNewDateTextInternal("02/13/1983", null));
+			Assert.AreEqual("20/01/2027", EditFormHelper.GetNewDateTextInternal("20/12/2027", null));
+			Assert.AreEqual("20/07/2027", EditFormHelper.GetNewDateTextInternal("20/06/2027", null));
+			Assert.AreEqual("2017-07-20", EditFormHelper.GetNewDateTextInternal("2017-06-20", null));
 		}
 
 		[TestMethod]
@@ -37,6 +40,7 @@ namespace BasePageObjectModel.Tests
 			Assert.AreEqual("01/02/1983", EditFormHelper.GetNewDateTextInternal("01/01/1983", "dd/MM/yyyy"));
 			//different language
 			Assert.AreEqual("01/02/1983", EditFormHelper.GetNewDateTextInternal("01/01/1983", "dd/MM/aaaa"));
+			Assert.AreEqual("20/07/2017", EditFormHelper.GetNewDateTextInternal("2017-06-20", "dd/MM/aaaa"));
 		}
 
 

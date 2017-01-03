@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using OpenQA.Selenium;
 
 namespace BasePageObjectModel
@@ -47,8 +45,21 @@ namespace BasePageObjectModel
 
 		public static string GetNewDateText(IWebElement webElement)
 		{
-			var originalText = webElement.GetAttribute("value");
+			var inputType = webElement.GetAttribute("type");
 			var placeholder = webElement.GetAttribute("placeholder");
+			string originalText;
+			if (!string.IsNullOrEmpty(inputType) && inputType == "date")
+			{
+				originalText = webElement.GetAttribute("value");
+				DateTime dateTime;
+				var format = "yyyy-MM-dd";
+				if (DateTime.TryParseExact(originalText, format, CultureInfo.CurrentCulture, DateTimeStyles.None, out dateTime))
+				{
+					dateTime = dateTime.AddMonths(1);
+				}
+				return dateTime.ToString(placeholder);
+			}
+			originalText = webElement.GetAttribute("value");
 			return GetNewDateTextInternal(originalText, placeholder);
 		}
 
@@ -80,15 +91,14 @@ namespace BasePageObjectModel
 			}
 			else
 			{
-				DateTime dateTime;
-				if (DateTime.TryParse(originalText, out dateTime))
-				{
-					return dateTime.AddMonths(1).ToShortDateString();
-				}
 				var monthParts = textParts.Where(p => p.Length <= 2 && Convert.ToInt32(p) <= 12).ToArray();
 				if (monthParts.Length > 1)
 				{
 					monthParts = monthParts.Where(p => Convert.ToInt32(p) < 12).ToArray();
+				}
+				if (monthParts.Length == 0)
+				{
+					monthParts = new[] { textParts.First() };
 				}
 				monthIndex = Array.IndexOf(textParts, monthParts[0]);
 			}

@@ -30,8 +30,8 @@ namespace BasePageObjectModel
 
 		public static IWebElement FindLabel(this BasePage page, string labelText)
 		{
-			var xpathToFind = $"//label[contains(., '{labelText}')]";
-			var label = page.GetElement(By.XPath(xpathToFind));
+			var label = page.WebDriver.FindElements(By.TagName("label"))
+				.FirstOrDefault(e => labelText == e.Text);
 			return label;
 		}
 
