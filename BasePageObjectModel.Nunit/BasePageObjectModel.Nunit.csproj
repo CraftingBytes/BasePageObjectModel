@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BasePageObjectModel\BasePageObjectModel.csproj">
-      <Project>{4C7FD6D2-DF5C-4E01-950A-91104B67883B}</Project>
+      <Project>{4c7fd6d2-df5c-4e01-950a-91104b67883b}</Project>
       <Name>BasePageObjectModel</Name>
     </ProjectReference>
   </ItemGroup>

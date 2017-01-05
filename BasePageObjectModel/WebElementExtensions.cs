@@ -127,6 +127,19 @@ namespace BasePageObjectModel
 				}
 				else
 				{
+					var list = webElement.GetAttribute("list");
+					if (list != null)
+					{
+						string[] parts = value.Split(new string[] {","}, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
+						webElement.SendKeys(parts[0]);
+
+						var parent = webElement.GetParent();
+						var listElement = parent.GetElement(By.Id(list));
+						var anchors = listElement.FindElements(By.CssSelector("li a"));
+						var anchor = anchors.First(a => a.Text == parts[1]);
+						anchor.Click();
+						return;
+					}
 					webElement.Clear();
 				}
 				webElement.SendKeys(value);
