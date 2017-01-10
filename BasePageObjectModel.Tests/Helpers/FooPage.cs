@@ -6,7 +6,7 @@ namespace BasePageObjectModel.Tests
 	{
 		public FooPage(IWebDriver driver) : base(driver)
 		{
-			SetPageUrl("/foo");
+			SetPageUrl("foo");
 		}
 	}
 }

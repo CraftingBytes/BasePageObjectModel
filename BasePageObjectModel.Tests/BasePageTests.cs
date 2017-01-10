@@ -31,5 +31,12 @@ namespace BasePageObjectModel.Tests
 			Assert.IsTrue(fooIdPage.IsUrlDisplayed());
 		}
 
+
+		[TestMethod]
+		public void TestSetPageUrl()
+		{
+			PageManager.Current = new FooPages("http://local.foo.com/xyz/");
+			Assert.AreEqual("http://local.foo.com/xyz/foo", FooPages.Foo.PageUrl);
+		}
 	}
 }

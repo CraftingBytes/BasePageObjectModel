@@ -127,6 +127,8 @@ namespace BasePageObjectModel
 				}
 				else
 				{
+					webElement.Clear();
+
 					var list = webElement.GetAttribute("list");
 					if (list != null)
 					{
@@ -140,7 +142,6 @@ namespace BasePageObjectModel
 						anchor.Click();
 						return;
 					}
-					webElement.Clear();
 				}
 				webElement.SendKeys(value);
 			}

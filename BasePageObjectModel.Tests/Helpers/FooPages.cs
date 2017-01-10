@@ -11,11 +11,10 @@ namespace BasePageObjectModel.Tests
 
 		public override void Initialize(IWebDriver webDriver = null)
 		{
-			int i = 17;
 			base.Initialize(webDriver);
 		}
 
-		public FooPage Foo => Current.BasePages.OfType<FooPage>().Single();
-		public FooIdPage FooId => Current.BasePages.OfType<FooIdPage>().Single();
+		public static FooPage Foo => Current.BasePages.OfType<FooPage>().Single();
+		public static FooIdPage FooId => Current.BasePages.OfType<FooIdPage>().Single();
 	}
 }
