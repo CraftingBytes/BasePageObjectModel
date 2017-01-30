@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using OpenQA.Selenium;
 
 namespace BasePageObjectModel.Tests
 {
@@ -37,6 +39,14 @@ namespace BasePageObjectModel.Tests
 		{
 			PageManager.Current = new FooPages("http://local.foo.com/xyz/");
 			Assert.AreEqual("http://local.foo.com/xyz/foo", FooPages.Foo.PageUrl);
+		}
+
+		[TestMethod]
+		public void TestHandleSpecialKeys()
+		{
+			var mockWebElement = new Mock<IWebElement>();
+			BasePage.HandleSpecialKeys("blah~Enter~Tab~Escape", mockWebElement.Object);
+			BasePage.HandleSpecialKeys("~Crap", mockWebElement.Object);
 		}
 	}
 }

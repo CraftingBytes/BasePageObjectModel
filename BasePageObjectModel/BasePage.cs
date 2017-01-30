@@ -11,7 +11,7 @@ namespace BasePageObjectModel
 	{
 		public static char SpecialKeyPrefix { get; set; } = '~';
 
-		public static string[] SpecialKeys { get; set; } = new[] { nameof(Keys.Enter), nameof(Keys.Escape), nameof(Keys.Tab), nameof(Keys.Space) };
+		public static string[] SpecialKeys { get; set; } = new[] { nameof(Keys.Enter), nameof(Keys.Escape), nameof(Keys.Tab) };
 		public Dictionary<string, string> QueryStrings { get; }
 
 		public BasePage(IWebDriver driver)
@@ -196,7 +196,7 @@ namespace BasePageObjectModel
 			}
 		}
 
-		private static void HandleSpecialKeys(string value, IWebElement current)
+		internal static void HandleSpecialKeys(string value, IWebElement current)
 		{
 			if (value.Contains(SpecialKeyPrefix))
 			{
@@ -204,8 +204,8 @@ namespace BasePageObjectModel
 				{
 					if (value.Contains(SpecialKeyPrefix + specialKey))
 					{
-						var keysProperty = typeof(Keys).GetProperty(specialKey);
-						var seleniumKey = (string)keysProperty.GetValue(null, null);
+						var keysField = typeof(Keys).GetField(specialKey);
+						var seleniumKey = (string)keysField.GetValue(null);
 						current.SendKeys(seleniumKey);
 					}
 				}
