@@ -1,4 +1,4 @@
-﻿
+﻿@model List<TestApp.Controllers.SomethingViewModel>
 @{
 	ViewBag.Title = "title";
 	Layout = "../shared/_Layout.cshtml";
@@ -8,3 +8,12 @@
 <div class="hello"> Hello World</div>
 
 <a href="@Url.Action("index", "second")" id="secondPageLink">Second Page</a>
+
+@{ var grid = new WebGrid(Model, canPage: false, canSort: false);}
+@grid.GetHtml(tableStyle: "table table-bordered table-hover",
+	htmlAttributes: new { id = "tableSomethings" },
+	columns: new WebGridColumn[]
+	{
+		new WebGridColumn { ColumnName = "FullName", Header = "Full Name" },
+		new WebGridColumn { ColumnName = "FullAddress", Header = "Full Address" },
+	})

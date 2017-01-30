@@ -40,7 +40,7 @@ namespace BasePageObjectModel.Tests
 			Assert.AreEqual("01/02/1983", EditFormHelper.GetNewDateTextInternal("01/01/1983", "dd/MM/yyyy"));
 			//different language
 			Assert.AreEqual("01/02/1983", EditFormHelper.GetNewDateTextInternal("01/01/1983", "dd/MM/aaaa"));
-			Assert.AreEqual("20/07/2017", EditFormHelper.GetNewDateTextInternal("2017-06-20", "dd/MM/aaaa"));
+			Assert.AreEqual("2017-07-20", EditFormHelper.GetNewDateTextInternal("2017-06-20", "dd-MM-aaaa"));
 		}
 
 

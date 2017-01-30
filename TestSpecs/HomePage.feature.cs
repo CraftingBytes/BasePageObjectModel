@@ -94,6 +94,35 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create the something")]
+        public virtual void CreateTheSomething()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create the something", ((string[])(null)));
+#line 12
+this.ScenarioSetup(scenarioInfo);
+#line 13
+ testRunner.Given("I am on the create page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Label",
+                        "Value"});
+            table1.AddRow(new string[] {
+                        "FullName",
+                        "Scott Reed"});
+            table1.AddRow(new string[] {
+                        "FullAddress",
+                        "3350 Brennan Dr, Raleigh NC, 27613"});
+#line 14
+ testRunner.When("I fill out the form with all kinds of characters", ((string)(null)), table1, "When ");
+#line 18
+ testRunner.And("I click Create", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 19
+ testRunner.Then("I should see the new value in the list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

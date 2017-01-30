@@ -1,4 +1,5 @@
-﻿using BasePageObjectModel;
+﻿using System.Collections.Generic;
+using BasePageObjectModel;
 using OpenQA.Selenium;
 
 namespace TestPageObjectModel
@@ -10,14 +11,23 @@ namespace TestPageObjectModel
 			SetPageUrl("/");
 		}
 
+		private IWebElement Title => GetElement(By.Id("title"));
+		private IWebElement SecondPageLink => GetElement(By.Id("secondPageLink"));
+		private IWebElement TableSomethings => GetElement(By.Id("tableSomethings"));
+
 		public string GetTitle()
 		{
-			return WebDriver.FindElement(By.Id("title")).Text;
+			return Title.Text;
 		}
 
 		public void ClickSecondPageLink()
 		{
-			WebDriver.FindElement(By.Id("secondPageLink")).Click();
+			SecondPageLink.Click();
+		}
+
+		public List<string[]> GetTableBody()
+		{
+			return TableSomethings.ToTableBody();
 		}
 	}
 }

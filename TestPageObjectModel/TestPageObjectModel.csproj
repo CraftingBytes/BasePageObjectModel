@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreatePage.cs" />
     <Compile Include="Pages.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
