@@ -202,7 +202,7 @@ namespace BasePageObjectModel
 			{
 				foreach (var specialKey in SpecialKeys)
 				{
-					if (value.Contains(SpecialKeyPrefix + specialKey.ToUpper()))
+					if (value.Contains(SpecialKeyPrefix + specialKey))
 					{
 						var keysProperty = typeof(Keys).GetProperty(specialKey);
 						var seleniumKey = (string)keysProperty.GetValue(null, null);
