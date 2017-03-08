@@ -14,7 +14,7 @@ namespace BasePageObjectModel
 	/// </summary>
 	public abstract class BaseElementContainer
 	{
-		private static TimeSpan DefaultWaitTime = TimeSpan.FromSeconds(1);
+		public static TimeSpan DefaultWaitTime = TimeSpan.FromSeconds(1);
 
 		protected BaseElementContainer(IWebDriver webDriver)
 		{
