@@ -14,6 +14,8 @@ namespace BasePageObjectModel
 	/// </summary>
 	public abstract class BaseElementContainer
 	{
+		private static TimeSpan DefaultWaitTime = TimeSpan.FromSeconds(1);
+
 		protected BaseElementContainer(IWebDriver webDriver)
 		{
 			WebDriver = webDriver;
@@ -171,12 +173,12 @@ namespace BasePageObjectModel
 
 		private IWebElement GetElementInternal(By by, TimeSpan? waitTime = null, Func<By, Func<IWebDriver, IWebElement>> expectedCondition = null)
 		{
-			return new WebDriverWait(WebDriver, waitTime ?? TimeSpan.FromSeconds(1)).Until(expectedCondition != null ? expectedCondition(by) : ExpectedConditions.ElementIsVisible(by));
+			return new WebDriverWait(WebDriver, waitTime ?? DefaultWaitTime).Until(expectedCondition != null ? expectedCondition(by) : ExpectedConditions.ElementIsVisible(by));
 		}
 
 		public ReadOnlyCollection<IWebElement> GetElements(By by, TimeSpan? waitTime = null)
 		{
-			return new WebDriverWait(WebDriver, waitTime ?? TimeSpan.FromSeconds(1)).Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
+			return new WebDriverWait(WebDriver, waitTime ?? DefaultWaitTime).Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
 		}
 	}
 }
