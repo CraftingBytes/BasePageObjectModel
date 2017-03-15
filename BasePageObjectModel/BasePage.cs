@@ -190,6 +190,10 @@ namespace BasePageObjectModel
 			foreach (var kvp in labelToValue)
 			{
 				var targetElement = GetLabelTarget(kvp.Key);
+				if (targetElement == null)
+				{
+					throw new Exception($"Couldn't find target element for label {kvp.Key}");
+				}
 				var replaced = StripKeysFromText(kvp.Value);
 				targetElement.FillElement(replaced);
 				HandleSpecialKeys(kvp.Value, targetElement);
