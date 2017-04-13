@@ -159,6 +159,10 @@ namespace BasePageObjectModel
 		public IWebElement GetLabelTargetByFor(string labelText)
 		{
 			var label = GetLabelByText(labelText);
+			if (label == null)
+			{
+				throw new Exception($"Couldn't find label with text '{labelText}'");
+			}
 			var forText = label.GetAttribute("for");
 			var targetElement = GetElement(By.Id(forText));
 			return targetElement;
