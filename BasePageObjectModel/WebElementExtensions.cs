@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -134,11 +135,16 @@ namespace BasePageObjectModel
 					{
 						string[] parts = value.Split(new string[] {","}, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
 						webElement.SendKeys(parts[0]);
+						Thread.Sleep(500);
 
 						var parent = webElement.GetParent();
 						var listElement = parent.GetElement(By.Id(list));
 						var anchors = listElement.FindElements(By.CssSelector("li a"));
-						var anchor = anchors.First(a => a.Text == parts[1]);
+						var anchor = anchors.FirstOrDefault(a => a.Text == parts[1]);
+						if (anchor == null)
+						{
+							throw new Exception($"Couldn't find list text {parts[1]}");
+						}
 						anchor.Click();
 						return;
 					}
@@ -147,5 +153,52 @@ namespace BasePageObjectModel
 			}
 		}
 
+		public static bool DoesTextMatch(this IWebElement e, string labelText)
+		{
+			try
+			{
+				return labelText == e.Text;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public static bool IsDisplayed(this IWebElement e)
+		{
+			try
+			{
+				return e.Displayed;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public static bool IsNullOrEmpty(this IWebElement l)
+		{
+			try
+			{
+				return string.IsNullOrEmpty(l.Text);
+			}
+			catch (Exception)
+			{
+				return true;
+			}
+		}
+
+		public static bool CheckForAttribute(this IWebElement l)
+		{
+			try
+			{
+				return l.GetAttribute("for") != null;
+			}
+			catch (Exception)
+			{
+				return true;
+			}
+		}
 	}
 }

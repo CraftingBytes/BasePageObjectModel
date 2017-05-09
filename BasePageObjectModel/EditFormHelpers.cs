@@ -1,12 +1,229 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
+using BasePageObjectModel;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace BasePageObjectModel
 {
-	public class EditFormHelper
+	class LabelAndDone
 	{
+		public IWebElement Label { get; set; }
+		public bool IsDone { get; set; }
+	}
+
+
+	public static class EditFormHelper
+	{
+		private static string lastRadioName = null;
+		private static bool nextRadioNeedsChecking = false;
+		private static IWebElement firstRadio;
+		private static Dictionary<string, LabelAndDone> _dictionaryOfCurrentLabels;
+
+		public static Dictionary<string, string> EditForm(this BasePage page)
+		{
+			var labelAndDones = new List<LabelAndDone>();
+			var dictionaryLabelsAndValues = new Dictionary<string, string>();
+			labelAndDones = page.CheckForNewLabels(labelAndDones);
+			while (!IsEverythingDone(labelAndDones))
+			{
+				labelAndDones = page.CheckForNewLabels(labelAndDones);
+				var label = GetNextUndoneLabel(labelAndDones);
+
+				var labelText = label.Text;
+				var webElement = page.SwitchToTargetElementForLabel(labelText);
+				if (webElement == null || !webElement.Enabled || !string.IsNullOrEmpty(webElement.GetAttribute("readonly")))
+				{
+					MarkElementComplete(labelAndDones, dictionaryLabelsAndValues, labelText, "");
+					continue;
+				}
+
+				var tagName = webElement.TagName;
+				var inputType = webElement.GetAttribute("type").ToLower();
+
+				if ((tagName == "select") || (tagName == "datalist"))
+				{
+					var selectElement = new SelectElement(webElement);
+					string optionText;
+					do
+					{
+						ChangeSelectElementValue(selectElement);
+						var selectedOption = selectElement.SelectedOption;
+						optionText = selectedOption.Text;
+					} while (string.IsNullOrEmpty(optionText));
+
+					MarkElementComplete(labelAndDones, dictionaryLabelsAndValues, labelText, optionText);
+				}
+				else if (tagName == "input" && (inputType == "checkbox"))
+				{
+					webElement.Click();
+					var value = webElement.GetAttribute("checked");
+					if (value == "true")
+					{
+						value = "checked";
+					}
+					MarkElementComplete(labelAndDones, dictionaryLabelsAndValues, labelText, value);
+				}
+				else if (tagName == "input" && (inputType == "radio"))
+				{
+					var valueToStore = "";
+					var currentRadioName = webElement.GetAttribute("name");
+					if (currentRadioName != lastRadioName)
+					{
+						lastRadioName = currentRadioName;
+						firstRadio = webElement;
+						nextRadioNeedsChecking = false;
+					}
+					if (nextRadioNeedsChecking)
+					{
+						webElement.Click();
+						valueToStore = "checked";
+					}
+					var value = webElement.GetAttribute("checked");
+					if (nextRadioNeedsChecking)
+					{
+						nextRadioNeedsChecking = false;
+					}
+					else if (!string.IsNullOrEmpty(value))
+					{
+						// if this one is checked then the next one needs to be checked
+						nextRadioNeedsChecking = true;
+					}
+					//TODO: what if there is no next one, need to remember the first one
+					MarkElementComplete(labelAndDones, dictionaryLabelsAndValues, labelText, valueToStore);
+				}
+				else // textarea plus input type=text, number, phone, date, email, etc.  All assumed to be typeable
+				{
+					string newText = null;
+					var originalText = webElement.GetAttribute("value");
+					if ((inputType == "number") || IsInputTextNumeric(originalText))
+					{
+						newText = EditFormHelper.GetNewNumberText(webElement);
+					}
+					else if (inputType == "date")
+					{
+						var dateText = EditFormHelper.GetNewDateText(webElement);
+
+						newText = dateText.Replace("/", "");
+						newText = newText.Replace("-", "");
+						webElement.SendKeys(newText);
+						MarkElementComplete(labelAndDones, dictionaryLabelsAndValues, labelText, dateText);
+						continue;
+					}
+					else
+					{
+						var placeholder = webElement.GetAttribute("placeholder");
+						if (!string.IsNullOrEmpty(placeholder) && placeholder.Contains("/"))
+						{
+							newText = EditFormHelper.GetNewDateText(webElement);
+						}
+						else
+						{
+							newText = originalText + "X";
+						}
+					}
+
+					if (inputType != "date")
+					{
+						webElement.Clear();
+					}
+					webElement.SendKeys(newText);
+
+					var list = webElement.GetAttribute("list");
+					if (!string.IsNullOrEmpty(list))
+					{
+						webElement = page.GetElement(By.Id(list));
+						var anchors = webElement.FindElements(By.CssSelector("li a"));
+						var anchor = anchors.First();
+						newText = anchor.Text;
+						anchor.Click();
+					}
+
+					MarkElementComplete(labelAndDones, dictionaryLabelsAndValues, labelText, newText);
+				}
+			}
+			return dictionaryLabelsAndValues;
+		}
+
+		private static bool IsInputTextNumeric(string originalText)
+		{
+			return !string.IsNullOrEmpty(originalText) && originalText.All(char.IsDigit);
+		}
+
+		private static void MarkElementComplete(List<LabelAndDone> labelAndDones, Dictionary<string, string> dictionaryLabelsAndValues, string labelText, string value)
+		{
+			dictionaryLabelsAndValues[labelText] = value;
+			var labelAndDone = labelAndDones.FirstOrDefault(lad => lad.Label.DoesTextMatch(labelText));
+			if (labelAndDone != null)
+			{
+				labelAndDone.IsDone = true;
+			}
+		}
+
+		private static IWebElement GetNextUndoneLabel(List<LabelAndDone> labelAndDones)
+		{
+			return labelAndDones.First(lad => !lad.IsDone).Label;
+		}
+
+		private static List<LabelAndDone> CheckForNewLabels(this BasePage page, List<LabelAndDone> labelAndDones)
+		{
+			Stopwatch sw = Stopwatch.StartNew();
+			var labels = page.WebDriver.FindElements(By.TagName("label"))
+				.Where(l => l.CheckForAttribute() && l.IsDisplayed() && !l.IsNullOrEmpty());
+			var newLabelsAndDones = labels.Select(l => new LabelAndDone { Label = l }).ToList();
+			foreach (var newLad in newLabelsAndDones)
+			{
+				LabelAndDone oldLabelAndDone = null;
+				_dictionaryOfCurrentLabels?.TryGetValue(newLad.Label.Text, out oldLabelAndDone);
+				newLad.IsDone = oldLabelAndDone?.IsDone ?? false;
+			}
+			_dictionaryOfCurrentLabels = newLabelsAndDones
+				.Where(lad => lad.Label.IsDisplayed() && !lad.Label.IsNullOrEmpty())
+				.ToDictionary(lad => lad.Label.Text, lad => lad);
+			Debug.WriteLine($"Finding and Merging labels: {sw.Elapsed}");
+			return newLabelsAndDones;
+		}
+
+		private static bool IsEverythingDone(List<LabelAndDone> labelAndDones)
+		{
+			return labelAndDones.All(lad => lad.IsDone);
+		}
+
+		private static void ChangeSelectElementValue(SelectElement selectElement)
+		{
+			int selectedIndex = -1;
+			for (int cnt = 0; cnt < selectElement.Options.Count; cnt++)
+			{
+				if (selectElement.Options[cnt].Text == selectElement.SelectedOption.Text)
+				{
+					selectedIndex = cnt;
+					break;
+				}
+			}
+			int newSelectedIndex = (selectedIndex + 1) % selectElement.Options.Count;
+			selectElement.SelectByIndex(newSelectedIndex);
+		}
+
+		private static IWebElement SwitchToTargetElementForLabel(this BasePage page, string labelText)
+		{
+			IWebElement webElement = page.GetTargetElementForLabel(labelText);
+			if (webElement == null)
+			{
+				return null;
+			}
+			if (!webElement.Displayed)
+			{
+				page.ClickLabel(labelText);
+				Thread.Sleep(100);
+				webElement = page.WebDriver.SwitchTo().ActiveElement();
+			}
+			return webElement;
+		}
+
 		public static string GetNewNumberText(IWebElement webElement)
 		{
 			var originalText = webElement.GetAttribute("value");
@@ -53,10 +270,11 @@ namespace BasePageObjectModel
 				originalText = webElement.GetAttribute("value");
 				DateTime dateTime;
 				var format = "yyyy-MM-dd";
-				if (DateTime.TryParseExact(originalText, format, CultureInfo.CurrentCulture, DateTimeStyles.None, out dateTime))
+				if (DateTime.TryParseExact(originalText, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
 				{
 					dateTime = dateTime.AddMonths(1);
 				}
+				placeholder = placeholder.Replace("a", "y");
 				return dateTime.ToString(placeholder);
 			}
 			originalText = webElement.GetAttribute("value");
@@ -82,7 +300,7 @@ namespace BasePageObjectModel
 			if (!string.IsNullOrEmpty(placeholder))
 			{
 				DateTime dateTime;
-				if (DateTime.TryParseExact(originalText, placeholder, CultureInfo.CurrentCulture, DateTimeStyles.None, out dateTime))
+				if (DateTime.TryParseExact(originalText, placeholder, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
 				{
 					return dateTime.AddMonths(1).ToString(placeholder);
 				}
