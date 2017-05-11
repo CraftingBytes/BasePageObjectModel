@@ -136,30 +136,37 @@ namespace BasePageObjectModel
 						string[] parts = value.Split(new string[] {","}, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
 						var textToType = parts[0].Trim();
 						var textToSelect = parts[1].Trim();
-						//Type Method
-						webElement.SendKeys(textToSelect);
 
-						// Ul a method
-						//var parent = webElement.GetParent();
-						//var listElement = parent.GetElement(By.Id(list));
-						//var anchors = listElement.FindElements(By.CssSelector("li a"));
-						//var anchor = anchors.FirstOrDefault(a => a.Text == parts[1]);
-						//if (anchor == null)
-						//{
-						//	throw new Exception($"Couldn't find list text {parts[1]}");
-						//}
-						//anchor.Click();
+						var parent = webElement.GetParent();
+						var listElement = parent.FindElement(By.Id(list));
+						if (listElement.TagName == "ul")
+						{
+							webElement.SendKeys(textToType);
+							Thread.Sleep(500);
 
-						// Datalist method (doesn't work)
-						//var parent = webElement.GetParent();
-						//var listElement = parent.FindElement(By.Id(list));
-						//var options = listElement.FindElements(By.CssSelector("option"));
-						//var option = options.FirstOrDefault(o => o.GetAttribute("value").Trim() == textToSelect);
-						//if (option == null)
-						//{
-						//	throw new Exception($"Couldn't find list text {parts[1]}");
-						//}
-						//option.Click();
+							var anchors = listElement.FindElements(By.CssSelector("li a"));
+							var anchor = anchors.FirstOrDefault(a => a.Text == parts[1]);
+							if (anchor == null)
+							{
+								throw new Exception($"Couldn't find list text {parts[1]}");
+							}
+							anchor.Click();
+						}
+						else
+						{
+							// Datalist method (doesn't work)
+							//var options = listElement.FindElements(By.CssSelector("option"));
+							//var option = options.FirstOrDefault(o => o.GetAttribute("value").Trim() == textToSelect);
+							//if (option == null)
+							//{
+							//	throw new Exception($"Couldn't find list text {parts[1]}");
+							//}
+							//option.Click();
+
+							// So just type instead
+							webElement.SendKeys(textToSelect);
+						}
+
 						return;
 					}
 				}
