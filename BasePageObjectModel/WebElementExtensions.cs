@@ -137,13 +137,13 @@ namespace BasePageObjectModel
 						var textToType = parts[0].Trim();
 						var textToSelect = parts[1].Trim();
 
+						webElement.SendKeys(textToType);
+						Thread.Sleep(500);
+
 						var parent = webElement.GetParent();
 						var listElement = parent.FindElement(By.Id(list));
 						if (listElement.TagName == "ul")
 						{
-							webElement.SendKeys(textToType);
-							Thread.Sleep(500);
-
 							var anchors = listElement.FindElements(By.CssSelector("li a"));
 							var anchor = anchors.FirstOrDefault(a => a.Text == parts[1]);
 							if (anchor == null)
@@ -164,6 +164,7 @@ namespace BasePageObjectModel
 							//option.Click();
 
 							// So just type instead
+							webElement.Clear();
 							webElement.SendKeys(textToSelect);
 						}
 
