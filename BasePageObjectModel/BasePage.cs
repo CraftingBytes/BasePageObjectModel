@@ -11,7 +11,18 @@ namespace BasePageObjectModel
 	{
 		public static char SpecialKeyPrefix { get; set; } = '~';
 
-		public static string[] SpecialKeys { get; set; } = new[] { nameof(Keys.Enter), nameof(Keys.Escape), nameof(Keys.Tab) };
+		public static string[] SpecialKeys { get; set; } = new[]
+		{
+			nameof(Keys.Enter),
+			nameof(Keys.Escape),
+			nameof(Keys.Tab),
+			nameof(Keys.Space),
+			nameof(Keys.Backspace),
+			nameof(Keys.Up),
+			nameof(Keys.Down),
+			nameof(Keys.Left),
+			nameof(Keys.Right),
+		};
 		public Dictionary<string, string> QueryStrings { get; }
 
 		public BasePage(IWebDriver driver)
@@ -204,7 +215,7 @@ namespace BasePageObjectModel
 			}
 		}
 
-		internal static void HandleSpecialKeys(string value, IWebElement current)
+		public static void HandleSpecialKeys(string value, IWebElement current)
 		{
 			if (value.Contains(SpecialKeyPrefix))
 			{
@@ -220,7 +231,7 @@ namespace BasePageObjectModel
 			}
 		}
 
-		private static string StripKeysFromText(string value)
+		public static string StripKeysFromText(string value)
 		{
 			string replaced = value;
 			if (value.Contains(SpecialKeyPrefix))
