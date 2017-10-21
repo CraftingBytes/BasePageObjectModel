@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
@@ -29,7 +28,7 @@ namespace BasePageObjectModel
 
 			//Use it as you want now
 			var fileName = GetType() + ".png";
-			ss.SaveAsFile(fileName, ImageFormat.Png);
+			ss.SaveAsFile(fileName, ScreenshotImageFormat.Png);
 			return Path.GetFullPath(fileName);
 		}
 

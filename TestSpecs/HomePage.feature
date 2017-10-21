@@ -9,7 +9,7 @@ Scenario: Navigating from the home page to the second page
 	When I click on the second page link
 	Then I should be on the second page
 
-Scenario: Create the something
+Scenario: Create the something else
 	Given I am on the create page
 	When I fill out the form with all kinds of characters
 	| Label       | Value                              |
