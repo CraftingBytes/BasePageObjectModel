@@ -5,7 +5,7 @@ namespace TestPageObjectModel
 {
 	public class Pages : PageManager
 	{
-		public Pages(string baseUrl = "http://localhost:49970/")
+		public Pages(string baseUrl = "http://localhost:5001/")
 			: base(baseUrl)
 		{
 		}

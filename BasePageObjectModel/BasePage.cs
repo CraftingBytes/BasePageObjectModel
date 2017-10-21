@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-
 namespace BasePageObjectModel
 {
 	public class BasePage : BaseElementContainer
@@ -33,7 +32,7 @@ namespace BasePageObjectModel
 
 		public string PageUrl { get; private set; }
 
-		protected UriTemplate PageUriTemplate { get; set; }
+		protected UriTemplate.Core.UriTemplate PageUriTemplate { get; set; }
 
 		public void SetPageUrl(string value)
 		{
