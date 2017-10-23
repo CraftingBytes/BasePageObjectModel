@@ -106,7 +106,7 @@ namespace BasePageObjectModel
 			});
 		}
 
-		public static void FillElement(this IWebElement webElement, string value)
+		public static void FillElement(this IWebElement webElement, string value, TimeSpan? waitTime = null)
 		{
 			var type = webElement.GetAttribute("type").ToLower();
 
@@ -138,7 +138,8 @@ namespace BasePageObjectModel
 						var textToSelect = parts[1].Trim();
 
 						webElement.SendKeys(textToType);
-						Thread.Sleep(500);
+						var timeToWait = waitTime ?? TimeSpan.FromMilliseconds(500);
+						Thread.Sleep(timeToWait);
 
 						var parent = webElement.GetParent();
 						var listElement = parent.FindElement(By.Id(list));

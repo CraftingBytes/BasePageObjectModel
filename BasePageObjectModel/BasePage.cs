@@ -210,7 +210,7 @@ namespace BasePageObjectModel
 					throw new Exception($"Couldn't find target element for label {kvp.Key}");
 				}
 				var replaced = StripKeysFromText(kvp.Value);
-				targetElement.FillElement(replaced);
+				targetElement.FillElement(replaced, DefaultWaitTime);
 				HandleSpecialKeys(kvp.Value, targetElement);
 			}
 		}
