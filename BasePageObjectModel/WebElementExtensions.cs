@@ -137,15 +137,22 @@ namespace BasePageObjectModel
 						var textToType = parts[0].Trim();
 						var textToSelect = parts[1].Trim();
 
-						webElement.SendKeys(textToType);
-						var timeToWait = waitTime ?? TimeSpan.FromMilliseconds(500);
-						Thread.Sleep(timeToWait);
-
 						var parent = webElement.GetParent();
-						var listElement = parent.FindElement(By.Id(list));
+						webElement.SendKeys(textToType);
+						var timeToWait = waitTime ?? TimeSpan.FromSeconds(5);
+						var start = DateTime.Now;
+
+						var listElement = parent.GetElement(By.Id(list));
 						if (listElement.TagName == "ul")
 						{
-							var anchors = listElement.FindElements(By.CssSelector("li a"));
+							ReadOnlyCollection<IWebElement> anchors;
+							do
+							{
+								Thread.Sleep(500);
+								listElement = parent.FindElement(By.Id(list));
+								anchors = listElement.FindElements(By.CssSelector("li a"));
+							} while (anchors.Count < 1 && DateTime.Now - start < timeToWait);
+
 							var anchor = anchors.FirstOrDefault(a => a.Text == parts[1]);
 							if (anchor == null)
 							{
