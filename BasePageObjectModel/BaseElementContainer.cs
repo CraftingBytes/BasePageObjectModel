@@ -29,7 +29,7 @@ namespace BasePageObjectModel
 
 			//Use it as you want now
 			var fileName = GetType() + ".png";
-			ss.SaveAsFile(fileName, ImageFormat.Png);
+			ss.SaveAsFile(fileName, ScreenshotImageFormat.Png);
 			return Path.GetFullPath(fileName);
 		}
 
