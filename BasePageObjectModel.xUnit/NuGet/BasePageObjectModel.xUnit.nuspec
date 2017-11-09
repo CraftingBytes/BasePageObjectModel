@@ -12,7 +12,7 @@
 		<copyright>Copyright 2016</copyright>
 		<tags>Selenium PageObjectModel xUnit</tags>
 		<dependencies>
-			<dependency id="BasePageObjectModel" version="2.0.14 />
+			<dependency id="BasePageObjectModel" version="2.0.14" />
 			<dependency id="xUnit" version="2.3.1" />
 		</dependencies>
 	</metadata>
