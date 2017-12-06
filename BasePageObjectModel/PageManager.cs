@@ -55,7 +55,18 @@ namespace BasePageObjectModel
 		{
 			get
 			{
-				return BasePages.FirstOrDefault(page => page.IsUrlDisplayed());
+				try
+				{
+					if (!string.IsNullOrEmpty(WebDriver.Url))
+					{
+						return BasePages.FirstOrDefault(page => page.IsUrlDisplayed());
+					}
+					return null;
+				}
+				catch (Exception)
+				{
+					return null;
+				}
 			}
 		}
 
