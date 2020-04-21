@@ -37,7 +37,9 @@ namespace BasePageObjectModel
 			var rows = new List<string[]>();
 			foreach (var tr in element.FindElements(By.TagName("tr")))
 			{
-				var thOrTds = tr.FindElements(By.TagName("th")).Union(tr.FindElements(By.TagName("td")));
+			    var ths = tr.FindElements(By.TagName("th"));
+			    var tds = tr.FindElements(By.TagName("td"));
+			    var thOrTds = ths.Union(tds);
 				rows.Add(thOrTds.Select(c => c.Text).ToArray());
 			}
 
@@ -54,7 +56,7 @@ namespace BasePageObjectModel
 			int[] maxColumnLengths = new int[list[0].Length];
 			for (int col = 0; col < maxColumnLengths.Length; col++)
 			{
-				maxColumnLengths[col] = list.Select(r => r[col].Length).Max();
+				maxColumnLengths[col] = list.Select(r => r.Length > col ? r[col].Length : 0).Max();
 			}
 
 			var builder = new StringBuilder();
@@ -67,7 +69,7 @@ namespace BasePageObjectModel
 						builder.Append("|");
 					}
 					string format = "{0,-" + maxColumnLengths[col] + "}";
-					builder.Append(string.Format(format, row[col]));
+					builder.Append(string.Format(format, row.Length > col ? row[col] : ""));
 				}
 				builder.AppendLine();
 			}
