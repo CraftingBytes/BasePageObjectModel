@@ -12,7 +12,9 @@
 		<copyright>Copyright 2016</copyright>
 		<tags>Selenium PageObjectModel</tags>
 		<dependencies>
-			<dependency id="Selenium.Support" version="3.141.0" />
+			<group targetFramework=".NETFramework4.0">
+				<dependency id="Selenium.Support" version="3.141.0" />
+			</group>
 		</dependencies>
 	</metadata>
 </package>

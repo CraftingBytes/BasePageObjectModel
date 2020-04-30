@@ -12,8 +12,10 @@
 		<copyright>Copyright 2016</copyright>
 		<tags>Selenium PageObjectModel Nunit</tags>
 		<dependencies>
-			<dependency id="BasePageObjectModel" version="2.2.0" />
-			<dependency id="NUnit" version="3.12.0" />
+			<group targetFramework=".NETFramework4.0">
+				<dependency id="BasePageObjectModel" version="2.2.0" />
+				<dependency id="NUnit" version="3.12.0" />
+			</group>
 		</dependencies>
 	</metadata>
 </package>
