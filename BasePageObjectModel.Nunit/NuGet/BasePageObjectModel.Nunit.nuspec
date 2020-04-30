@@ -11,6 +11,7 @@
 		<releaseNotes>Breaking change. BasePage renamed to NunitBasePage.</releaseNotes>
 		<copyright>Copyright 2016</copyright>
 		<tags>Selenium PageObjectModel Nunit</tags>
+		<license type="expression">MIT</license>
 		<dependencies>
 			<group targetFramework=".NETFramework4.0">
 				<dependency id="BasePageObjectModel" version="2.2.0" />
