@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>BasePageObjectModel.NUnit</id>
-		<version>2.1.1</version>
+		<version>2.3.0</version>
 		<title>BasePageObjectModel.NUnit</title>
 		<authors>CraftingBytes</authors>
 		<owners>CraftingBytes</owners>
@@ -12,8 +12,8 @@
 		<copyright>Copyright 2016</copyright>
 		<tags>Selenium PageObjectModel Nunit</tags>
 		<dependencies>
-			<dependency id="BasePageObjectModel" version="2.1.0" />
-			<dependency id="NUnit" version="3.8.1" />
+			<dependency id="BasePageObjectModel" version="2.2.0" />
+			<dependency id="NUnit" version="3.12.0" />
 		</dependencies>
 	</metadata>
 </package>
