@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-
-namespace BasePageObjectModel
+﻿namespace BasePageObjectModel
 {
 	public static class WebElementExtensions
 	{
@@ -37,9 +28,9 @@ namespace BasePageObjectModel
 			var rows = new List<string[]>();
 			foreach (var tr in element.FindElements(By.TagName("tr")))
 			{
-			    var ths = tr.FindElements(By.TagName("th"));
-			    var tds = tr.FindElements(By.TagName("td"));
-			    var thOrTds = ths.Union(tds);
+				var ths = tr.FindElements(By.TagName("th"));
+				var tds = tr.FindElements(By.TagName("td"));
+				var thOrTds = ths.Union(tds);
 				rows.Add(thOrTds.Select(c => c.Text).ToArray());
 			}
 
@@ -135,7 +126,7 @@ namespace BasePageObjectModel
 					var list = webElement.GetAttribute("list");
 					if (list != null)
 					{
-						string[] parts = value.Split(new string[] {","}, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
+						string[] parts = value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
 						var textToType = parts[0].Trim();
 						var textToSelect = parts[1].Trim();
 

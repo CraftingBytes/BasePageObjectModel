@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using OpenQA.Selenium;
+using BasePageObjectModel.Tests.Helpers;
 
 namespace BasePageObjectModel.Tests
 {

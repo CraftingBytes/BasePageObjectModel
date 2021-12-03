@@ -1,6 +1,3 @@
-using System;
-using OpenQA.Selenium;
-
 namespace BasePageObjectModel
 {
 	public class WaitNavigationContext<TFrom> : BaseNavigationContext<TFrom> where TFrom : BasePage

@@ -1,7 +1,4 @@
-﻿using Moq;
-using OpenQA.Selenium;
-
-namespace BasePageObjectModel.Tests
+﻿namespace BasePageObjectModel.Tests.Helpers
 {
 	public static class WebDriverFactory
 	{

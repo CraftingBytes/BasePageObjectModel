@@ -11,12 +11,12 @@ namespace BasePageObjectModel.MSTest
 
 		public void AreEqual(string expected, string actual)
 		{
-			Assert.AreEqual(expected,actual);
+			Assert.AreEqual(expected, actual);
 		}
 
 		public void IsNotNull(object actual, string message = null)
 		{
-			Assert.IsNotNull(actual,message);
+			Assert.IsNotNull(actual, message);
 		}
 	}
 }

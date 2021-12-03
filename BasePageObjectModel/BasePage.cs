@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using DotnetGap;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -109,7 +110,7 @@ namespace BasePageObjectModel
 			var uriActual = new Uri(WebDriver.Url);
 			var actualUrlLeftPart = uriActual.GetLeftPart(UriPartial.Path);
 			var match = PageUriTemplate.Match(PageManager.Current.BaseUrl, new Uri(actualUrlLeftPart));
-			return match != null;
+			return match;// != null;
 		}
 
 		public void ScrollToBottomOfScreen()

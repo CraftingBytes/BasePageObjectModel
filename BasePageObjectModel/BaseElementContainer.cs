@@ -1,11 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
+﻿using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace BasePageObjectModel
 {
