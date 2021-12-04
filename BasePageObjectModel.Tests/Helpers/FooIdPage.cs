@@ -1,4 +1,4 @@
-﻿using DotnetGap;
+﻿using System;
 
 namespace BasePageObjectModel.Tests.Helpers
 {
@@ -7,8 +7,8 @@ namespace BasePageObjectModel.Tests.Helpers
 		public FooIdPage(IWebDriver driver, int id)
 			: base(driver)
 		{
-			PageUriTemplate = new UriTemplate("foo/{id}");
-			SetPageUrl(PageUriTemplate.BindByPosition(PageManager.Current.BaseUrl, id.ToString()));
+			PageUriTemplate = new UriTemplate.UriTemplate("foo/{id}");
+			SetPageUrl(new Uri(PageManager.Current.BaseUrl, id.ToString()).ToString());
 		}
 	}
 }

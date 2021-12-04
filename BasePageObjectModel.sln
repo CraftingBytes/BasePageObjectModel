@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasePageObjectModel.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasePageObjectModel.xUnit", "BasePageObjectModel.xUnit\BasePageObjectModel.xUnit.csproj", "{21E6B0E5-C117-413E-BF14-4599333B2B88}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetGap", "DotnetGap\DotnetGap.csproj", "{FF05112B-3350-4B94-8583-BEF6C4C0CA96}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{2D01CD1E-F656-4978-A4DE-8213B9D643F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSpecs", "TestSpecs\TestSpecs.csproj", "{41207546-8170-4625-B663-31E0035A45DE}"
@@ -47,10 +45,6 @@ Global
 		{21E6B0E5-C117-413E-BF14-4599333B2B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21E6B0E5-C117-413E-BF14-4599333B2B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21E6B0E5-C117-413E-BF14-4599333B2B88}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF05112B-3350-4B94-8583-BEF6C4C0CA96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF05112B-3350-4B94-8583-BEF6C4C0CA96}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF05112B-3350-4B94-8583-BEF6C4C0CA96}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF05112B-3350-4B94-8583-BEF6C4C0CA96}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2D01CD1E-F656-4978-A4DE-8213B9D643F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D01CD1E-F656-4978-A4DE-8213B9D643F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D01CD1E-F656-4978-A4DE-8213B9D643F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
