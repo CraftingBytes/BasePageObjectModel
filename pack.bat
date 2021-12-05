@@ -1,4 +1,4 @@
-.\tools\nuget.exe pack BasePageObjectModel\NuGet\BasePageObjectModel.nuspec
-.\tools\nuget.exe pack BasePageObjectModel.NUnit\NuGet\BasePageObjectModel.Nunit.nuspec
-.\tools\nuget.exe pack BasePageObjectModel.MsTest\NuGet\BasePageObjectModel.MsTest.nuspec
-.\tools\nuget.exe pack BasePageObjectModel.xUnit\NuGet\BasePageObjectModel.xUnit.nuspec
+dotnet pack .\BasePageObjectModel\BasePageObjectModel.csproj -o nuget
+dotnet pack .\BasePageObjectModel.Nunit\BasePageObjectModel.Nunit.csproj -o nuget
+dotnet pack .\BasePageObjectModel.xUnit\BasePageObjectModel.xUnit.csproj -o nuget
+dotnet pack .\BasePageObjectModel.MSTest\BasePageObjectModel.MSTest.csproj -o nuget

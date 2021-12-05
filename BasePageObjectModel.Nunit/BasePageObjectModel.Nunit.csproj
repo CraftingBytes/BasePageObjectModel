@@ -1,17 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.13.2" />
-  </ItemGroup>
+	<PropertyGroup>
+		<PackageId>BasePageObjectModel.Nunit</PackageId>
+		<Version>3.0.0</Version>
+		<PackageTags>Selenium;PageObjectModel</PackageTags>
+		<Description>
+			Base assembly for PageObjectModels
+		</Description>
+		<Authors>CraftingBytes</Authors>
+		<Company>CraftingBytes</Company>
+		<License>MIT</License>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BasePageObjectModel\BasePageObjectModel.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="NUnit" Version="3.13.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BasePageObjectModel\BasePageObjectModel.csproj" />
+	</ItemGroup>
 
 </Project>

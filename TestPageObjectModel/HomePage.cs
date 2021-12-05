@@ -1,4 +1,5 @@
 ﻿using BasePageObjectModel;
+using BasePageObjectModel.Nunit;
 using OpenQA.Selenium;
 
 namespace TestPageObjectModel

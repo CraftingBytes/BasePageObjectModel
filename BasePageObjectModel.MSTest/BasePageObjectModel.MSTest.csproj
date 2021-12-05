@@ -1,18 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<PackageId>BasePageObjectModel.MSTest</PackageId>
+		<Version>3.0.0</Version>
+		<PackageTags>Selenium;PageObjectModel</PackageTags>
+		<Description>
+			Base assembly for PageObjectModels
+		</Description>
+		<Authors>CraftingBytes</Authors>
+		<Company>CraftingBytes</Company>
+		<License>MIT</License>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BasePageObjectModel\BasePageObjectModel.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
+		<PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BasePageObjectModel\BasePageObjectModel.csproj" />
+	</ItemGroup>
 
 </Project>
