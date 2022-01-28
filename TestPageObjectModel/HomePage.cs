@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using BasePageObjectModel;
+﻿using BasePageObjectModel;
+using BasePageObjectModel.Nunit;
 using OpenQA.Selenium;
 
 namespace TestPageObjectModel

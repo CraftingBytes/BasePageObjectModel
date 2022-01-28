@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-
-namespace BasePageObjectModel
+﻿namespace BasePageObjectModel
 {
 	public class BasePage : BaseElementContainer
 	{
 		public static char SpecialKeyPrefix { get; set; } = '~';
 
-		public static string[] SpecialKeys { get; set; } = new[]
-		{
+		public static string[] SpecialKeys { get; set; } = {
 			nameof(Keys.Enter),
 			nameof(Keys.Escape),
 			nameof(Keys.Tab),
@@ -33,7 +25,7 @@ namespace BasePageObjectModel
 
 		public string PageUrl { get; private set; }
 
-		protected UriTemplate PageUriTemplate { get; set; }
+		protected UriTemplate.UriTemplate PageUriTemplate { get; set; }
 
 		public void SetPageUrl(string value)
 		{
@@ -103,8 +95,8 @@ namespace BasePageObjectModel
 			if (PageUriTemplate == null)
 			{
 				return Uri.Compare(new Uri(PageUrl), new Uri(WebDriver.Url),
-					UriComponents.Path, UriFormat.Unescaped,
-					StringComparison.InvariantCultureIgnoreCase) == 0;
+				UriComponents.Path, UriFormat.Unescaped,
+				StringComparison.InvariantCultureIgnoreCase) == 0;
 			}
 			var uriActual = new Uri(WebDriver.Url);
 			var actualUrlLeftPart = uriActual.GetLeftPart(UriPartial.Path);

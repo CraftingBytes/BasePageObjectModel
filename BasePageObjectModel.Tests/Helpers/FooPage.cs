@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace BasePageObjectModel.Tests
+﻿namespace BasePageObjectModel.Tests.Helpers
 {
 	internal class FooPage : BasePage
 	{

@@ -1,7 +1,4 @@
-﻿using System;
-using OpenQA.Selenium.Support.UI;
-
-namespace BasePageObjectModel
+﻿namespace BasePageObjectModel
 {
 	public static class WaitExtensions
 	{
@@ -9,7 +6,7 @@ namespace BasePageObjectModel
 		{
 			var urlBeforeClick = page.WebDriver.Url;
 			action(page);
-			return page.WaitForLoad(urlBeforeClick,timeout);
+			return page.WaitForLoad(urlBeforeClick, timeout);
 		}
 
 		public static bool WaitForLoad(this BasePage basePage, string urlBeforeClick, TimeSpan? timeout = null)

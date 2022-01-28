@@ -1,91 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4C7FD6D2-DF5C-4E01-950A-91104B67883B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BasePageObjectModel</RootNamespace>
-    <AssemblyName>BasePageObjectModel</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net40\SeleniumExtras.WaitHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net40\WebDriver.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.3.141.0\lib\net40\WebDriver.Support.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BaseElementContainer.cs" />
-    <Compile Include="BaseNavigationContext.cs" />
-    <Compile Include="BasePage.cs" />
-    <Compile Include="BasePageExtensions.cs" />
-    <Compile Include="BasePopup.cs" />
-    <Compile Include="EditFormHelpers.cs" />
-    <Compile Include="IAssert.cs" />
-    <Compile Include="Navigate.cs" />
-    <Compile Include="PageManager.cs" />
-    <Compile Include="PostbackNavigationContext.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceRegistry.cs" />
-    <Compile Include="TestUser.cs" />
-    <Compile Include="UriExtensions.cs" />
-    <Compile Include="WaitExtensions.cs" />
-    <Compile Include="WaitNavigationContext.cs" />
-    <Compile Include="WebElementExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy /s /y $(TargetPath) $(ProjectDir)NuGet\lib\net40\</PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageId>BasePageObjectModel</PackageId>
+		<Version>3.0.0</Version>
+		<PackageTags>Selenium;PageObjectModel</PackageTags>
+		<Description>
+			Base assembly for PageObjectModels
+		</Description>
+		<Authors>CraftingBytes</Authors>
+		<Company>CraftingBytes</Company>
+		<License>MIT</License>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+		<PackageReference Include="Selenium.Support" Version="4.1.0" />
+		<PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
+		<PackageReference Include="UriTemplate" Version="1.0.0" />
+	</ItemGroup>
+
 </Project>

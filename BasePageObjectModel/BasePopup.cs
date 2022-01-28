@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace BasePageObjectModel
+﻿namespace BasePageObjectModel
 {
 	public class BasePopup : BaseElementContainer
 	{

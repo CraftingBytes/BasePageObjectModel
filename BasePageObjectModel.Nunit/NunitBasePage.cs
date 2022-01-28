@@ -1,7 +1,6 @@
-﻿using BasePageObjectModel.Nunit;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
-namespace BasePageObjectModel
+namespace BasePageObjectModel.Nunit
 {
 	public class NunitBasePage : BasePage
 	{

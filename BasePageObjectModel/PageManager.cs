@@ -1,8 +1,4 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium.Chrome;
 
 namespace BasePageObjectModel
 {
@@ -73,8 +69,8 @@ namespace BasePageObjectModel
 		protected BasePage[] GetPagesInAssembly(PageManager pageManager)
 		{
 			var pageTypes = from t in GetType().Assembly.GetTypes()
-				where t.IsSubclassOf(typeof(BasePage)) && !t.IsAbstract
-				select t;
+							where t.IsSubclassOf(typeof(BasePage)) && !t.IsAbstract
+							select t;
 			var pages = new List<BasePage>();
 			foreach (var pageType in pageTypes)
 			{

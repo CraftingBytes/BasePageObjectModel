@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using BasePageObjectModel;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using System.Runtime.CompilerServices;
 
+[assembly:InternalsVisibleTo("BasePageObjectModel.Tests")]
 namespace BasePageObjectModel
 {
 	class LabelAndDone
@@ -15,7 +8,6 @@ namespace BasePageObjectModel
 		public IWebElement Label { get; set; }
 		public bool IsDone { get; set; }
 	}
-
 
 	public static class EditFormHelper
 	{
@@ -328,7 +320,7 @@ namespace BasePageObjectModel
 		private static string GetNewMonthText(string monthText)
 		{
 			var monthPart = Convert.ToInt32(monthText);
-			var newMonthText = (monthPart%12 + 1).ToString("00");
+			var newMonthText = (monthPart % 12 + 1).ToString("00");
 			return newMonthText;
 		}
 

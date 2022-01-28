@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace BasePageObjectModel.Tests
+﻿namespace BasePageObjectModel.Tests
 {
 	[TestClass]
 	public class EditFormHelperTests
@@ -51,7 +44,7 @@ namespace BasePageObjectModel.Tests
 			Assert.AreEqual("18", EditFormHelper.GetNewNumberTextInternal("17", null, null));
 
 			Assert.AreEqual("1", EditFormHelper.GetNewNumberTextInternal("5", minText: null, maxText: "5"));
-			Assert.AreEqual("2", EditFormHelper.GetNewNumberTextInternal("5", minText:"2", maxText:"5"));
+			Assert.AreEqual("2", EditFormHelper.GetNewNumberTextInternal("5", minText: "2", maxText: "5"));
 		}
 
 		[TestMethod]

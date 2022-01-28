@@ -1,15 +1,14 @@
 ﻿using System;
-using OpenQA.Selenium;
 
-namespace BasePageObjectModel.Tests
+namespace BasePageObjectModel.Tests.Helpers
 {
 	internal class FooIdPage : BasePage
 	{
-		public FooIdPage(IWebDriver driver, int id) 
+		public FooIdPage(IWebDriver driver, int id)
 			: base(driver)
 		{
-			PageUriTemplate = new UriTemplate("foo/{id}");
-			SetPageUrl(PageUriTemplate.BindByPosition(PageManager.Current.BaseUrl, id.ToString()).ToString());
+			PageUriTemplate = new UriTemplate.UriTemplate("foo/{id}");
+			SetPageUrl(new Uri(PageManager.Current.BaseUrl, id.ToString()).ToString());
 		}
 	}
 }

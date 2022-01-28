@@ -1,11 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
+﻿using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace BasePageObjectModel
 {
@@ -70,10 +63,10 @@ namespace BasePageObjectModel
 			}
 		}
 
-		private object ExecuteScript(IWebElement element, string js)
+		private T ExecuteScript<T>(IWebElement element, string js)
 		{
 			var executor = (IJavaScriptExecutor)WebDriver;
-			return executor.ExecuteScript(js, element);
+			return (T)executor.ExecuteScript(js, element);
 		}
 
 		protected bool IsHiddenControlChecked(By elementLocator)
@@ -84,7 +77,7 @@ namespace BasePageObjectModel
 		protected bool IsHiddenControlChecked(IWebElement element)
 		{
 			var js = "return arguments[0].checked;";
-			return (bool)ExecuteScript(element, js);
+			return ExecuteScript<bool>(element, js);
 		}
 
 		protected bool IsElementVisible(By elementLocator)

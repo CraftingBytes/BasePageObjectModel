@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using BasePageObjectModel;
+﻿using BasePageObjectModel;
 
 namespace TestPageObjectModel
 {

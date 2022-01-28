@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using OpenQA.Selenium;
 
-namespace BasePageObjectModel.Tests
+namespace BasePageObjectModel.Tests.Helpers
 {
 	internal class FooPages : PageManager
 	{

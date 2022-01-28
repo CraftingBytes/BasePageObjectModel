@@ -1,22 +1,18 @@
-﻿using System;
-using System.Linq;
-using OpenQA.Selenium;
-
-namespace BasePageObjectModel
+﻿namespace BasePageObjectModel
 {
 	public static class BasePageExtensions
 	{
 		public static void Is<T>(this BasePage page)
 			where T : BasePage
 		{
-			T castedPage = page.As<T>();
+			var castedPage = page.As<T>();
 			ServiceRegistry.Assert.IsNotNull(castedPage);
 		}
 
 		public static T As<T>(this BasePage page)
 			where T : BasePage
 		{
-			return page as T;
+			return (T)page;
 		}
 
 		public static By ByPartialId(this BasePage page, string id)

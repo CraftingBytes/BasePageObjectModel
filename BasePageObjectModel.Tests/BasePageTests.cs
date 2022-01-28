@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using OpenQA.Selenium;
+﻿using BasePageObjectModel.Tests.Helpers;
 
 namespace BasePageObjectModel.Tests
 {
